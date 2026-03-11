@@ -6,9 +6,9 @@
 
 <div class="container py-4">
     <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap">
-        <h2 class="fw-bold mb-2">Edit City</h2>
+        <h2 class="fw-bold mb-2">Edit Destination</h2>
         <a href="{{ route('admin.cities.index') }}" class="btn btn-outline-secondary">
-            <i class="bi bi-arrow-left me-1"></i> Back to Cities
+            <i class="bi bi-arrow-left me-1"></i> Back to Destinations
         </a>
     </div>
     <div class="card shadow-sm rounded-4 border-0">
@@ -18,7 +18,7 @@
                 @method('PUT')
 
                 <div class="mb-3">
-                    <label class="form-label fw-semibold">City Name <span class="text-danger">*</span></label>
+                    <label class="form-label fw-semibold">Name <span class="text-danger">*</span></label>
                     <input type="text" name="name" class="form-control rounded-3 shadow-sm" value="{{ old('name', $city->name) }}" required>
                 </div>
                 <div class="mb-3">
@@ -50,7 +50,7 @@
                     </select>
                 </div>
                 <div class="mb-3">
-                    <label class="form-label fw-semibold">City Image</label>
+                    <label class="form-label fw-semibold">Image</label>
                     @if($city->image)
                         <div class="mb-2">
                             <img src="{{ asset($city->image) }}" class="img-thumbnail" style="max-height:120px">

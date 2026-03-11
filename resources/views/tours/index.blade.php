@@ -117,7 +117,7 @@
           <div class="col-sm-6 col-xl-3">
             <div class="card card-img-scale overflow-hidden bg-transparent">
               <div class="card-img-scale-wrapper rounded-3">
-                <img src="{{ asset($tour->tour_images->url) }}" class="card-img" alt="">
+                <img src="{{ asset($tour->tour_images->url ?? 'images/tours/default.jpg' ) }}" class="card-img" alt="">
                 <div class="card-img-overlay d-flex flex-column p-4">
                   <div class="d-flex justify-content-between">
                     {{-- <span class="badge text-bg-dark">{{ $pkg[3] }}</span> --}}

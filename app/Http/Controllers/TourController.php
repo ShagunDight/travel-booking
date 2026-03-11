@@ -45,6 +45,8 @@ class TourController extends Controller
     public function tour_detail($id)
     {
         $tour = Tour::with(['tour_images','itineraries','inclusions','exclusions','policies'])->find($id);
+        // return $tour;
+
         return view('tours.tour_detail', compact('tour'));
     }
 

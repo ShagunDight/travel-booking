@@ -199,12 +199,12 @@
     </section>
     <section>
         <div class="container">
-            <h2>Explore Categories</h2>
+            <h2>Explore Hotels</h2>
             <div class="row">
-                @foreach($categories as $key => $value)
+                @foreach($hotels as $key => $value)
                     <div class="col-lg-6 col-md-6 mb-4">
                         <div class="category-card">
-                            <img src="{{ asset($value->image_url) }}" alt="{{ $value->name }}" class="category-image">
+                            <img src="{{ asset($value->image) }}" alt="{{ $value->name }}" class="category-image">
                             <div class="category-info">
                                 <h5>{{ $value->name }}</h5>
                             </div>
@@ -218,23 +218,17 @@
         <div class="container">
             <h2 class="text-center mb-5">Top-Selling Holiday Packages</h2>
             <div class="row g-4">
-                @foreach($tours as $tour)
+                @foreach($packages as $package)
                     <div class="col-md-6 col-lg-4">
                         <div class="card h-100 shadow-sm hover-card">
 
-                        <img src="{{ asset($tour->image->url ?? 'images/default.jpg') }}"
-                            class="card-img-top"
-                            alt="{{ $tour->name }}">
-
+                            <img src="{{ asset($package->package_images->url ?? 'images/default.jpg') }}" class="card-img-top package-img" alt="{{ $package->name }}">
                             <div class="card-body">
-
-                                <h5 class="card-title">{{ $tour->name }}</h5>
-
+                                <h5 class="card-title">{{ $package->name }}</h5>
                                 <div class="rating-plan">
                                     <div class="rating-day">
-                                        <p class="text-muted">{{ $tour->duration }}</p>
+                                        <p class="text-muted">{{ $package->duration }}</p>
                                     </div>
-
                                     <div class="mb-2">
                                         <span class="text-warning">★★★★★</span>
                                         <span class="text-muted small">(4.8)</span>
@@ -243,22 +237,17 @@
 
                                 <div class="d-flex justify-content-between align-items-center mb-3">
                                     <h4 class="text-price-primary mb-0">
-                                        <i class="fa fa-inr"></i>{{ $tour->price }}
+                                        <i class="fa fa-inr"></i>{{ $package->price }}
                                     </h4>
-
                                     <small class="text-muted">per person</small>
                                 </div>
 
-                                <button type="button"
-                                        onclick="window.location.href='{{ route('tour.booking',$tour->id) }}'"
-                                        class="btn bg-custom-blue custom-number-name w-100">
+                                <button type="button" onclick="window.location.href='{{ route('tour.booking',$package->id) }}'" class="btn bg-custom-blue custom-number-name w-100">
                                         Book Now
                                 </button>
-
                             </div>
                         </div>
                     </div>
-
                 @endforeach
             </div>
         </div>
@@ -284,38 +273,49 @@
         <div class="container">
             <h2>International Destinations</h2>
             <div class="row">
-                <div class="col-lg-6 col-md-6 mb-4">
-                    <div class="category-card">
-                        <img src="https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=300&h=250&fit=crop" alt="Europe" class="category-image">
-                        <div class="category-info">
-                            <h5>Europe</h5>
+                @forelse($internationalDestinations as $key => $value)
+                    <div class="col-lg-6 col-md-6 mb-4">
+                        <div class="category-card">
+                            <img src="{{ asset($value->image ?? '/images/cities/default.jpg') }}" alt="{{ $value->name }}" class="category-image">
+                            <div class="category-info">
+                                <h5>{{ $value->name }}</h5>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-6 col-md-6 mb-4">
-                    <div class="category-card">
-                        <img src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=300&h=250&fit=crop" alt="Southeast Asia" class="category-image">
-                        <div class="category-info">
-                            <h5>Southeast Asia</h5>
+                @empty
+                    <div class="col-lg-6 col-md-6 mb-4">
+                        <div class="category-card">
+                            <img src="https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=300&h=250&fit=crop" alt="Europe" class="category-image">
+                            <div class="category-info">
+                                <h5>Europe</h5>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-6 col-md-6 mb-4">
-                    <div class="category-card">
-                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=250&fit=crop" alt="Middle East" class="category-image">
-                        <div class="category-info">
-                            <h5>Middle East</h5>
+                    <div class="col-lg-6 col-md-6 mb-4">
+                        <div class="category-card">
+                            <img src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=300&h=250&fit=crop" alt="Southeast Asia" class="category-image">
+                            <div class="category-info">
+                                <h5>Southeast Asia</h5>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg-6 col-md-6 mb-4">
-                    <div class="category-card">
-                        <img src="https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=300&h=250&fit=crop" alt="Americas" class="category-image">
-                        <div class="category-info">
-                            <h5>Americas</h5>
+                    <div class="col-lg-6 col-md-6 mb-4">
+                        <div class="category-card">
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=300&h=250&fit=crop" alt="Middle East" class="category-image">
+                            <div class="category-info">
+                                <h5>Middle East</h5>
+                            </div>
                         </div>
                     </div>
-                </div>
+                    <div class="col-lg-6 col-md-6 mb-4">
+                        <div class="category-card">
+                            <img src="https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=300&h=250&fit=crop" alt="Americas" class="category-image">
+                            <div class="category-info">
+                                <h5>Americas</h5>
+                            </div>
+                        </div>
+                    </div>
+                @endforelse
             </div>
         </div>
     </section>

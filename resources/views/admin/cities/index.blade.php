@@ -3,9 +3,9 @@
 
 <div class="container py-4">
     <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap">
-        <h2 class="fw-bold mb-2">Cities</h2>
+        <h2 class="fw-bold mb-2">Destinations</h2>
         <a href="{{ route('admin.cities.create') }}" class="btn btn-primary mb-3">
-            <i class="bi bi-plus-lg me-1"></i> Add City
+            <i class="bi bi-plus-lg me-1"></i> Add Destination
         </a>
     </div>
     <div class="card shadow-sm rounded-4 border-0">
@@ -41,7 +41,7 @@
                         </tr>
                     @empty
                         <tr>
-                            <td colspan="5" class="text-center text-muted py-4">No cities found.</td>
+                            <td colspan="5" class="text-center text-muted py-4">No Destinations found.</td>
                         </tr>
                     @endforelse
                 </tbody>
