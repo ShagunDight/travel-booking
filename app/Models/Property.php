@@ -80,4 +80,8 @@ class Property extends Model
     public function stops() {
         return $this->hasMany(TourStop::class); 
     }
+
+    public function hotel_images() { 
+        return $this->hasMany(Image::class, 'type_id')->where('type', 1); 
+    }
 }

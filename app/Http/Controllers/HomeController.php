@@ -19,7 +19,9 @@ class HomeController extends Controller
             'indianDestinations' => City::where('country', 'IN')->take(12)->get(),
             'internationalDestinations' => City::where('country', '!=', 'IN')->take(12)->get(),
             'locations' => Tour::select('location')->distinct()->orderBy('location', 'asc')->pluck('location'),
-            'testimonials' => Review::with('user')->latest()->take(4)->get(), 
+            'testimonials' => Review::with('user')->latest()->take(4)->get(),
+
+            'tours' => Tour::with('tour_images')->latest()->take(6)->get(),
         ]);
     }
 

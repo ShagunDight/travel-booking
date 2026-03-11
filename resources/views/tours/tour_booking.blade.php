@@ -29,17 +29,23 @@
             </div>
         </div>
     </section>
-    @php
-        $durationRaw = $tour->duration;
-        preg_match('/(\d+)\s*Days?\s*\/?\s*(\d+)\s*Nights?/i', $durationRaw, $matches);
-        $days = $matches[1] ?? 0;
-        $nights  = $matches[2] ?? 0;
+@if($tour)
 
-        $totalPrice = $tour->price * $nights;
-        $discount = $totalPrice * 0.1;
-        $priceAfterDiscount = $totalPrice - $discount;
-        $finalAmount = $priceAfterDiscount + 350;
-    @endphp
+@php
+$durationRaw = $tour->duration ?? '';
+preg_match('/(\d+)\s*Days?\s*\/?\s*(\d+)\s*Nights?/i', $durationRaw, $matches);
+
+$days = $matches[1] ?? 0;
+$nights  = $matches[2] ?? 0;
+
+$totalPrice = $tour->price;
+$discount = $totalPrice * 0.1;
+$priceAfterDiscount = $totalPrice - $discount;
+$finalAmount = $priceAfterDiscount + 350;
+
+@endphp
+
+@endif
     <section>
         <div class="container">
             <div id="stepper" class="bs-stepper stepper-outline">
@@ -84,7 +90,7 @@
                                         <div class="card shadow rounded-2 overflow-hidden">
                                             <div class="row g-0">
                                                 <div class="col-sm-6 col-md-4">
-                                                    <img src="{{ asset($tour->tour_images->url) }}" class="" alt="">
+                                                <img src="{{ asset($tour->tour_images->url ?? '') }}" class="" alt="">
                                                 </div>
                                                 <div class="col-sm-6 col-md-8">
                                                     <div class="card-body p-3">
@@ -344,12 +350,12 @@
 
                                         <div class="card border">
                                             <div class="card-header border-bottom">
-                                                <h5 class="mb-0">Pay with Paypal</h5>
+                                                <h5 class="mb-0">Pay with Razorpay</h5>
                                             </div>
                                             <div class="card-body text-center">
                                                 <img src="assets/images/element/paypal.svg" class="h-70px mb-3" alt="">
                                                 <p class="mb-3"><strong>Tips:</strong> Simply click on the payment button below to proceed to the PayPal payment page.</p>
-                                                <a href="#" class="btn btn-sm btn-outline-primary mb-0">Pay with Paypal</a>
+                                                <a href="#"  id="payBtn" class="btn btn-sm btn-outline-primary mb-0">Pay with Razorpay</a>
                                             </div>
                                         </div>
                                         <div class="d-flex justify-content-between">
@@ -389,6 +395,9 @@
                                         <div class="d-flex justify-content-between align-items-center">
                                             <span class="h5 mb-0">Payable Now</span>
                                             <span class="h5 mb-0"><i class="fa fa-inr"></i>{{ $finalAmount }}</span>
+                                            <input type="hidden" id="payable_id" value="{{ $tour->id }}">
+                                            <input type="hidden" id="payable_type" value="tour">
+                                            <input type="hidden" id="final_amount" value="{{ $finalAmount }}">
                                         </div>
                                         {{-- <div class="d-grid mt-4">
                                             <button class="btn btn-primary next-btn mb-0">Book as Guest</button>
@@ -415,4 +424,72 @@
     });
 </script>
 
+<!-- Payment -->
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+<script>
+
+document.getElementById('payBtn').onclick = function(){
+
+var amount = document.getElementById('final_amount').value;
+var payable_id = document.getElementById('payable_id').value;
+var payable_type = document.getElementById('payable_type').value;
+
+// 1️⃣ Create order from server
+fetch("{{ route('create.order') }}", {
+    method: 'POST',
+    headers: {
+        'Content-Type':'application/json',
+        'X-CSRF-TOKEN':"{{ csrf_token() }}"
+    },
+    body: JSON.stringify({ amount: amount })
+})
+.then(res => res.json())
+.then(function(data){
+
+    var options = {
+        "key": data.key,
+        "amount": data.amount * 100,
+        "currency": "INR",
+        "name": payable_type.charAt(0).toUpperCase() + payable_type.slice(1) + " Booking",
+        "description": "Payment for " + payable_type,
+        "order_id": data.order_id,
+        "handler": function(response){
+            
+            // 2️⃣ Verify payment server side
+            fetch("{{ route('verify.payment') }}", {
+                method: 'POST',
+                headers: {
+                    'Content-Type':'application/json',
+                    'X-CSRF-TOKEN':"{{ csrf_token() }}"
+                },
+                body: JSON.stringify({
+                    razorpay_payment_id: response.razorpay_payment_id,
+                    razorpay_order_id: response.razorpay_order_id,
+                    razorpay_signature: response.razorpay_signature,
+                    amount: amount,
+                    payable_id: payable_id,
+                    payable_type: payable_type
+                })
+            })
+            .then(res => res.json())
+            .then(function(res){
+                if(res.status === 'success'){
+                   
+                    window.location.href = res.redirect;
+                } else {
+                    alert('Payment Failed: ' + res.error);
+                }
+            });
+
+        }
+    };
+
+    var rzp = new Razorpay(options);
+    rzp.open();
+
+});
+
+}
+</script>
 @endsection

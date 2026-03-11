@@ -218,132 +218,48 @@
         <div class="container">
             <h2 class="text-center mb-5">Top-Selling Holiday Packages</h2>
             <div class="row g-4">
-                <div class="col-md-6 col-lg-4">
-                    <div class="card h-100 shadow-sm hover-card">
-                        <img src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=800&h=600&fit=crop" class="card-img-top" alt="Nainital"> 
-                        <div class="card-body">
-                            <h5 class="card-title">Nainital & Mussoorie Tour</h5>
-                            <div class="rating-plan">
-                                <div class="rating-day">
-                                    <p class="text-muted">5 Days / 4 Nights</p>
+                @foreach($tours as $tour)
+                    <div class="col-md-6 col-lg-4">
+                        <div class="card h-100 shadow-sm hover-card">
+
+                        <img src="{{ asset($tour->image->url ?? 'images/default.jpg') }}"
+                            class="card-img-top"
+                            alt="{{ $tour->name }}">
+
+                            <div class="card-body">
+
+                                <h5 class="card-title">{{ $tour->name }}</h5>
+
+                                <div class="rating-plan">
+                                    <div class="rating-day">
+                                        <p class="text-muted">{{ $tour->duration }}</p>
+                                    </div>
+
+                                    <div class="mb-2">
+                                        <span class="text-warning">★★★★★</span>
+                                        <span class="text-muted small">(4.8)</span>
+                                    </div>
                                 </div>
-                                <div class="mb-2">
-                                    <span class="text-warning">★★★★★</span> <span class="text-muted small">(4.8)</span> 
+
+                                <div class="d-flex justify-content-between align-items-center mb-3">
+                                    <h4 class="text-price-primary mb-0">
+                                        <i class="fa fa-inr"></i>{{ $tour->price }}
+                                    </h4>
+
+                                    <small class="text-muted">per person</small>
                                 </div>
+
+                                <button type="button"
+                                        onclick="window.location.href='{{ route('tour.booking',$tour->id) }}'"
+                                        class="btn bg-custom-blue custom-number-name w-100">
+                                        Book Now
+                                </button>
+
                             </div>
-                            <div class="d-flex justify-content-between align-items-center mb-3">
-                                <h4 class="text-price-primary mb-0"><i class="fa fa-inr"></i>15,999</h4>
-                                <small class="text-muted">per person</small>
-                            </div>
-                            <a href="#booking" class="btn btn-primary w-100 custom-number-name">Book Now</a>
                         </div>
                     </div>
-                </div>
-                <div class="col-md-6 col-lg-4">
-                    <div class="card h-100 shadow-sm hover-card">
-                        <img src="https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=800&h=600&fit=crop" class="card-img-top" alt="Goa"> 
-                        <div class="card-body">
-                            <h5 class="card-title">Goa Beach Paradise</h5>
-                            <div class="rating-plan">
-                                <div class="rating-day">
-                                    <p class="text-muted">4 Days / 3 Nights</p>
-                                </div>
-                                <div class="mb-2">
-                                    <span class="text-warning">★★★★✩</span> <span class="text-muted small">(4.6)</span> 
-                                </div>
-                            </div>
-                            <div class="d-flex justify-content-between align-items-center mb-3">
-                                <h4 class="text-price-primary mb-0"><i class="fa fa-inr"></i>12,499</h4>
-                                <small class="text-muted">per person</small>
-                            </div>
-                            <a href="#booking" class="btn btn-primary w-100 custom-number-name">Book Now</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-4">
-                    <div class="card h-100 shadow-sm hover-card">
-                        <img src="https://images.unsplash.com/photo-1602216056096-3b40cc0c9944?w=800&h=600&fit=crop" class="card-img-top" alt="Kerala"> 
-                        <div class="card-body">
-                            <h5 class="card-title">Kerala Luxury Retreat</h5>
-                            <div class="rating-plan">
-                                <div class="rating-day">
-                                    <p class="text-muted">6 Days / 5 Nights</p>
-                                </div>
-                                <div class="mb-2">
-                                    <span class="text-warning"></span><span class="text-muted small">(4.9)</span> 
-                                </div>
-                            </div>
-                            <div class="d-flex justify-content-between align-items-center mb-3">
-                                <h4 class="text-price-primary mb-0">*<i class="fa fa-inr"></i>24,999</h4>
-                                <small class="text-muted">per person</small>
-                            </div>
-                            <a href="#booking" class="btn btn-primary w-100 custom-number-name">Book Now</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-4">
-                    <div class="card h-100 shadow-sm hover-card">
-                        <img src="https://images.unsplash.com/photo-1524492412937-b28074a5d7da?w=800&h=600&fit=crop" class="card-img-top" alt="Rajasthan"> 
-                        <div class="card-body">
-                            <h5 class="card-title">Rajasthan Heritage Tour</h5>
-                            <div class="rating-plan">
-                                <div class="rating-day">
-                                    <p class="text-muted">7 Days / 6 Nights</p>
-                                </div>
-                                <div class="mb-2">
-                                    <span class="text-warning">★★★★✩</span><span class="text-muted small">(4.7)</span> 
-                                </div>
-                            </div>
-                            <div class="d-flex justify-content-between align-items-center mb-3">
-                                <h4 class="text-price-primary mb-0"><i class="fa fa-inr"></i>18,999</h4>
-                                <small class="text-muted">per person</small>
-                            </div>
-                            <a href="#booking" class="btn btn-primary w-100 custom-number-name">Book Now</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-4">
-                    <div class="card h-100 shadow-sm hover-card">
-                        <img src="https://images.unsplash.com/photo-1551632811-561732d1e306?w=800&h=600&fit=crop" class="card-img-top" alt="Himalayan"> 
-                        <div class="card-body">
-                            <h5 class="card-title">Himalayan Adventure</h5>
-                            <div class="rating-plan">
-                                <div class="rating-day">
-                                    <p class="text-muted">8 Days / 7 Nights</p>
-                                </div>
-                                <div class="mb-2">
-                                    <span class="text-warning">★★★★✩</span> <span class="text-muted small">(4.5)</span> 
-                                </div>
-                            </div>
-                            <div class="d-flex justify-content-between align-items-center mb-3">
-                                <h4 class="text-price-primary mb-0">*<i class="fa fa-inr"></i>22,999</h4>
-                                <small class="text-muted">per person</small>
-                            </div>
-                            <a href="#booking" class="btn btn-primary w-100 custom-number-name">Book Now</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-lg-4">
-                    <div class="card h-100 shadow-sm hover-card">
-                        <img src="https://images.unsplash.com/photo-1511895426328-dc8714191300?w=800&h=600&fit=crop" class="card-img-top" alt="Family"> 
-                        <div class="card-body">
-                            <h5 class="card-title">Family Fun Package</h5>
-                            <div class="rating-plan">
-                                <div class="rating-day">
-                                    <p class="text-muted">5 Days / 4 Nights</p>
-                                </div>
-                                <div class="mb-2">
-                                    <span class="text-warning">★★★★★</span> <span class="text-muted small">(4.8)</span> 
-                                </div>
-                            </div>
-                            <div class="d-flex justify-content-between align-items-center mb-3">
-                                <h4 class="text-price-primary mb-0"><i class="fa fa-inr"></i>14,999</h4>
-                                <small class="text-muted">per person</small>
-                            </div>
-                            <a href="#booking" class="btn bg-custom-blue custom-number-name w-100">Book Now</a>
-                        </div>
-                    </div>
-                </div>
+
+                @endforeach
             </div>
         </div>
     </section>

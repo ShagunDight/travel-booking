@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Models\Tour;
 use App\Models\Category;
+use App\Models\Payment;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 
@@ -50,6 +51,25 @@ class TourController extends Controller
     public function tour_booking($id)
     {
         $tour = Tour::with(['tour_images','itineraries','inclusions','exclusions','policies'])->find($id);
+        if(!$tour){
+            abort(404);
+        }
         return view('tours.tour_booking', compact('tour'));
+    }
+
+    // My code
+
+    public function bookingSuccess($order_id)
+    {
+        $payment = Payment::with('tour.tour_images')->where('razorpay_order_id', $order_id)->first();
+
+        if (!$payment) {
+            abort(404, "Payment not found.");
+        }
+
+        $tour = $payment->tour; 
+        $user = auth()->user();
+
+        return view('tours.tour_bookingsuccess', compact('tour', 'payment', 'user'));
     }
 }

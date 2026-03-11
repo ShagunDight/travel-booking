@@ -358,7 +358,7 @@
                                     <div class="accordion-item mb-3">
                                         <h6 class="accordion-header" id="heading-3">
                                             <button class="accordion-button rounded collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse-3" aria-expanded="false" aria-controls="collapse-3">
-                                                <i class="bi bi-paypal text-primary me-2"></i><span class="me-5">Pay with Paypal</span>
+                                                <i class="bi bi-paypal text-primary me-2"></i><span class="me-5">Pay with Razorpay</span>
                                             </button>
                                         </h6>
                                         <div id="collapse-3" class="accordion-collapse collapse" aria-labelledby="heading-3" data-bs-parent="#accordioncircle" style="">
@@ -366,7 +366,14 @@
                                                 <div class="card card-body border align-items-center text-center mt-4">
                                                     <img src="assets/images/element/paypal.svg" class="h-70px mb-3" alt="">
                                                     <p class="mb-3"><strong>Tips:</strong> Simply click on the payment button below to proceed to the PayPal payment page.</p>
-                                                    <a href="#" class="btn btn-sm btn-outline-primary mb-0">Pay with paypal</a>
+                                                        <!-- Razorpay Payment Button -->
+                                                        <button type="button" id="payBtn" class="btn btn-sm btn-outline-primary mb-0">
+                                                            Pay with Razorpay
+                                                        </button>
+                                                        <input type="hidden" id="payable_id" value="{{ $hotel->id }}">
+                                                            <input type="hidden" id="payable_type" value="hotel">
+                                                            <input type="hidden" id="final_amount" value="{{ $finalAmount }}">
+
                                                 </div>
                                             </div>
                                         </div>
@@ -467,4 +474,71 @@
     </section>
 </main>
 
+<!-- Payment -->
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+<script>
+
+document.getElementById('payBtn').onclick = function(){
+
+var amount = document.getElementById('final_amount').value;
+var payable_id = document.getElementById('payable_id').value;
+var payable_type = document.getElementById('payable_type').value;
+
+// 1️⃣ Create order from server
+fetch("{{ route('create.order') }}", {
+    method: 'POST',
+    headers: {
+        'Content-Type':'application/json',
+        'X-CSRF-TOKEN':"{{ csrf_token() }}"
+    },
+    body: JSON.stringify({ amount: amount })
+})
+.then(res => res.json())
+.then(function(data){
+
+    var options = {
+        "key": data.key,
+        "amount": data.amount * 100,
+        "currency": "INR",
+        "name": payable_type.charAt(0).toUpperCase() + payable_type.slice(1) + " Booking",
+        "description": "Payment for " + payable_type,
+        "order_id": data.order_id,
+        "handler": function(response){
+            
+            // 2️⃣ Verify payment server side
+            fetch("{{ route('verify.payment') }}", {
+                method: 'POST',
+                headers: {
+                    'Content-Type':'application/json',
+                    'X-CSRF-TOKEN':"{{ csrf_token() }}"
+                },
+                body: JSON.stringify({
+                    razorpay_payment_id: response.razorpay_payment_id,
+                    razorpay_order_id: response.razorpay_order_id,
+                    razorpay_signature: response.razorpay_signature,
+                    amount: amount,
+                    payable_id: payable_id,
+                    payable_type: payable_type
+                })
+            })
+            .then(res => res.json())
+            .then(function(res){
+                if(res.status === 'success'){
+                    window.location.href = res.redirect;
+                } else {
+                    alert('Payment Failed: ' + res.error);
+                }
+            });
+
+        }
+    };
+
+    var rzp = new Razorpay(options);
+    rzp.open();
+
+});
+
+}
+</script>
 @endsection

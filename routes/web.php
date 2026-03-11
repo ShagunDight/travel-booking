@@ -17,6 +17,7 @@ use App\Http\Controllers\Admin\RoleController;
 use App\Http\Controllers\Admin\PermissionController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\TaxiInquiryController;
+use App\Http\Controllers\PaymentController;
 
 // Route::get('/', function () {
 //     return view('welcome');
@@ -75,5 +76,24 @@ Route::middleware(['auth','is_admin'])->prefix('admin')->as('admin.')->group(fun
     Route::post('bookings/items', [BookingController::class, 'getBookableItems'])->name('bookings.items');
     Route::get('packages/gallery/delete/{id}', [PackageController::class, 'deleteGallery'])->name('packages.deleteGallery');
 });
+
+//  my code
+
+// TOUR
+Route::get('/tour-booking/{id}', [TourController::class,'tour_booking'])->name('tour.booking');
+
+Route::get('/tour-booking-success/{order_id}', [\App\Http\Controllers\TourController::class,'bookingSuccess'])
+->name('tour.booking.success');
+
+// Hotel
+
+Route::get('/hotel-booking-success/{order_id}', [\App\Http\Controllers\HotelController::class, 'hotelBookingSuccess'])
+->name('hotel.booking.success');
+
+
+// Payment
+Route::post('/create-order',[PaymentController::class,'createOrder'])->name('create.order');
+
+Route::post('/verify-payment',[PaymentController::class,'verifyPayment'])->name('verify.payment');
 
 require __DIR__.'/auth.php';

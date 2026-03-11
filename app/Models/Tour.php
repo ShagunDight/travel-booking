@@ -57,4 +57,5 @@ class Tour extends Model
     {
         return $this->hasMany(TourStop::class)->orderBy('day_number');
     }
+
 }
