@@ -8,20 +8,18 @@ use App\Models\Country;
 use App\Models\User;
 use App\Models\Review;
 use App\Models\Tour;
+use App\Models\Property;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
     public function index() {
         return view('home', [ 
-            'packages' => Package::where('popular', 1)->with('package_images')->latest()->take(8)->get(), 
-            'categories' => Category::take(4)->get(),
+            'packages' => Package::where('popular', 1)->with('package_images')->latest()->take(8)->get(),
+            'hotels' => Property::where('featured', 1)->latest()->take(6)->get(),
             'indianDestinations' => City::where('country', 'IN')->take(12)->get(),
-            'internationalDestinations' => City::where('country', '!=', 'IN')->take(12)->get(),
+            'internationalDestinations' => City::where('country', '!=', 'IN')->take(4)->get(),
             'locations' => Tour::select('location')->distinct()->orderBy('location', 'asc')->pluck('location'),
-            'testimonials' => Review::with('user')->latest()->take(4)->get(),
-
-            'tours' => Tour::with('tour_images')->latest()->take(6)->get(),
         ]);
     }
 

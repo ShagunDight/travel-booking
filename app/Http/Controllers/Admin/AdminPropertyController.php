@@ -37,9 +37,11 @@ class AdminPropertyController extends Controller
             'city_id'=>'required|exists:cities,id', 
             'address'=>'nullable', 
             'about'=>'nullable', 
+            'image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
         ]); 
         
-        Property::create($data); 
+        $p = Property::create($data);
+
         return redirect()->route('admin.properties.index')->with('success','Property created');
     }
 
@@ -62,9 +64,56 @@ class AdminPropertyController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
-        //
+        $property = Property::findOrFail($id);
+
+        $data = $request->validate([
+            'name'    => 'required',
+            'slug'    => 'required|unique:properties,slug,' . $property->id,
+            'city_id' => 'required|exists:cities,id',
+            'address' => 'nullable',
+            'about'   => 'nullable',
+            'image'   => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
+        ]);
+
+        if ($request->hasFile('image')) {
+
+            // delete old image
+            if ($property->image && file_exists(public_path($property->image))) {
+                unlink(public_path($property->image));
+            }
+
+            $imageName = time().'_'.$request->file('image')->getClientOriginalName();
+            $request->file('image')->move(public_path('/images/hotel'), $imageName);
+
+            $data['image'] = '/images/hotel/'.$imageName;
+        }
+
+        $property->update($data);
+
+        // update image table
+        if ($request->hasFile('image')) {
+
+            $image = Image::where('type',1)->where('type_id',$property->id)->first();
+
+            if ($image) {
+                $image->update([
+                    'url' => '/images/hotel/'.$imageName,
+                    'alt' => $property->name,
+                ]);
+            } else {
+                Image::create([
+                    'type'    => 1,
+                    'type_id' => $property->id,
+                    'url'     => '/images/hotel/'.$imageName,
+                    'alt'     => $property->name,
+                    'sort'    => 0,
+                ]);
+            }
+        }
+
+        return redirect()->route('admin.properties.index')->with('success','Property updated successfully');
     }
 
     /**

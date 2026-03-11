@@ -132,6 +132,10 @@
                 class="nav-link text-white rounded-3 mb-2 {{ request()->is('admin/dashboard') ? 'active bg-primary' : '' }}">
                     <i class="bi bi-speedometer2 me-2"></i> Dashboard
                 </a>
+                <a href="/admin/banners" 
+                class="nav-link text-white rounded-3 mb-2 {{ request()->is('admin/banners*') ? 'active bg-primary' : '' }}">
+                    <i class="bi bi-image me-2"></i> Banners
+                </a>
                 <a href="/admin/hotels" 
                 class="nav-link text-white rounded-3 mb-2 {{ request()->is('admin/hotels*') ? 'active bg-primary' : '' }}">
                     <i class="bi bi-building me-2"></i> Hotels
@@ -157,7 +161,7 @@
                 </a>
                 <a href="/admin/cities" 
                 class="nav-link text-white rounded-3 mb-2 {{ request()->is('admin/cities*') ? 'active bg-primary' : '' }}">
-                    <i class="bi bi-geo-alt me-2"></i> Cities
+                    <i class="bi bi-geo-alt me-2"></i> Destinations
                 </a>
                 <a href="/admin/countries" 
                 class="nav-link text-white rounded-3 mb-2 {{ request()->is('admin/countries*') ? 'active bg-primary' : '' }}">

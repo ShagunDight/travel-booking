@@ -60,6 +60,22 @@
                     @enderror
                 </div>
                 <div class="mb-3">
+                    <label class="form-label fw-semibold">main Image</label>
+
+                    @if($hotel->image)
+                        <div class="mb-2">
+                            <img src="{{ asset($hotel->image) }}" class="img-thumbnail" style="max-height:120px">
+                        </div>
+                    @endif
+
+                    <input type="file" name="image" class="form-control rounded-3 shadow-sm" accept="image/*">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label fw-semibold">Gallery Images (Multiple)</label>
+                    <input type="file" name="gallery[]" class="form-control rounded-3 shadow-sm" accept="image/*" multiple>
+                    <small class="text-muted">You can upload multiple images (JPG, PNG, WEBP)</small>
+                </div>
+                <div class="mb-3">
                     <label class="form-label fw-semibold">Hotel Visibility</label>
                     <div class="form-check form-switch">
                         <input class="form-check-input" type="checkbox" name="featured" id="featured" value="1" {{ old('featured', $hotel->featured) ? 'checked' : '' }}>

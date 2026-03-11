@@ -39,7 +39,7 @@
 						<div class="splide__track" id="splide02-track" style="">
 							<ul class="splide__list" id="splide02-list">
 								<li class="splide__slide rounded" id="splide02-slide01" aria-hidden="true" tabindex="-1" style="width: 1170px; height: 585px; transition: opacity 400ms cubic-bezier(0.42, 0.65, 0.27, 0.99); background: url(&quot;{{ asset($tour->tour_images->url)}}&quot;) center center / cover no-repeat;">
-									<img src="{{ asset($tour->tour_images->url)}}" alt="{{$tour->tour_images->alt}}" style="display: none;">
+									<img src="{{ asset($tour->tour_images->url ?? 'images/tours/default.jpg')}}" alt="{{$tour->tour_images->alt}}" style="display: none;">
 									<a href="assets/images/gallery/04.jpg" class="stretched-link" data-glightbox="" data-gallery="banner"></a>
 								</li>
 							</ul>

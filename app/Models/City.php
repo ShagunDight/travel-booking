@@ -11,6 +11,7 @@ class City extends Model
         'state',
         'country',
         'emoji',
+        'image',
     ];
 
     public function properties() { 

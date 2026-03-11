@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\RoomController;
 use App\Http\Controllers\Admin\TourController; 
 use App\Http\Controllers\Admin\PackageController; 
 use App\Http\Controllers\Admin\BookingController;
+use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\CityController;
 use App\Http\Controllers\Admin\CountryController;
 use App\Http\Controllers\Admin\UserController;
@@ -65,6 +66,7 @@ Route::middleware(['auth','is_admin'])->prefix('admin')->as('admin.')->group(fun
     Route::resource('tours', TourController::class); 
     Route::resource('packages', PackageController::class); 
     Route::resource('bookings', BookingController::class);
+    Route::resource('banners', BannerController::class);
     Route::resource('cities', CityController::class);
     Route::resource('countries', CountryController::class);
     Route::resource('users', UserController::class);
