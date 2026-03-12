@@ -18,6 +18,16 @@
                 @method('PUT')
 
                 <div class="mb-3">
+                    <label class="form-label fw-semibold">Type <span class="text-danger">*</span></label>
+                    <select name="type" id="type" class="form-select rounded-3 shadow-sm" required>
+                        <option value="">-- Select Type --</option>
+                        <option value="Home" {{ $banner->type=='Home'?'selected':'' }}>Home</option>
+                        <option value="Hotel" {{ $banner->type=='Hotel'?'selected':'' }}>Hotel</option>
+                        <option value="Tour" {{ $banner->type=='Tour'?'selected':'' }}>Tour</option>
+                    </select>
+                </div>
+
+                <div class="mb-3">
                     <label class="form-label fw-semibold">Title <span class="text-danger">*</span></label>
                     <input type="text" name="title" class="form-control rounded-3 shadow-sm" value="{{ old('title', $banner->title) }}" required>
                 </div>
@@ -80,6 +90,9 @@ $(document).ready(function () {
             $(element).removeClass("is-invalid").addClass("is-valid");
         },
         rules: {
+            type: {
+                required: true
+            },
             title: {
                 required: true,
                 minlength: 2
@@ -89,6 +102,9 @@ $(document).ready(function () {
             }
         },
         messages: {
+            type: {
+                required: "Please select type"
+            },
             title: {
                 required: "Please enter banner title",
                 minlength: "Title must be at least 2 characters"

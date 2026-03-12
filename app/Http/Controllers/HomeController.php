@@ -9,12 +9,14 @@ use App\Models\User;
 use App\Models\Review;
 use App\Models\Tour;
 use App\Models\Property;
+use App\Models\Banner;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
     public function index() {
-        return view('home', [ 
+        return view('home', [
+            'banners' => Banner::where('type', 'Home')->get(),
             'packages' => Package::where('popular', 1)->with('package_images')->latest()->take(8)->get(),
             'hotels' => Property::where('featured', 1)->latest()->take(6)->get(),
             'indianDestinations' => City::where('country', 'IN')->take(12)->get(),
