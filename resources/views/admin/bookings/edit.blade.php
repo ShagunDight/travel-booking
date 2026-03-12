@@ -127,6 +127,9 @@ $(document).ready(function () {
         },
 
         rules: {
+            bookable_type: {
+                required: true
+            },
             guests: {
                 required: true,
                 digits: true,
@@ -155,6 +158,9 @@ $(document).ready(function () {
         },
 
         messages: {
+            bookable_type: {
+                required: "Please select booking type"
+            },
             guests: {
                 required: "Please enter number of guests",
                 digits: "Guests must be a number",

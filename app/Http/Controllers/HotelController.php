@@ -3,13 +3,15 @@
 namespace App\Http\Controllers;
 use App\Models\Property;
 use App\Models\Room;
+use App\Models\Banner;
 use Illuminate\Http\Request;
 
 class HotelController extends Controller
 {
     public function index() {
+        $banner = Banner::where('type', 'Hotel')->latest()->first();
         $hotels = Property::where('featured', 1)->with('city','property_image','minRoomPrice')->latest()->paginate(4);
-        return view('hotels.index', compact('hotels'));
+        return view('hotels.index', compact('banner','hotels'));
     }
 
     // public function search_hotel(Request $request)

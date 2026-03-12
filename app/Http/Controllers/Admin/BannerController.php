@@ -32,6 +32,7 @@ class BannerController extends Controller
     {
          // Validate request
         $data = $request->validate([
+            'type' => 'required|string|in:Home,Tour,Hotel',
             'title'    => 'required|string|max:255',
             'subtitle' => 'nullable|string|max:255',
             'image'    => 'required|image|mimes:jpg,jpeg,png,webp|max:2048',
@@ -74,6 +75,7 @@ class BannerController extends Controller
     {
         // Validate request
         $data = $request->validate([
+            'type' => 'required|string|in:Home,Tour,Hotel',
             'title'    => 'required|string|max:255',
             'subtitle' => 'nullable|string|max:255',
             'image'    => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',

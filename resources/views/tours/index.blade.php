@@ -5,11 +5,11 @@
 <main>
   <section class="pt-0">
     <div class="container position-relative">
-      <div class="rounded-3 p-4 p-sm-5" style="background-image: url('{{ asset('/images/tours/02.jpg') }}'); background-size: cover;">
+      <div class="rounded-3 p-4 p-sm-5" style="background-image: url('{{ asset($banner->image) }}'); background-size: cover;">
         <div class="row justify-content-between pb-5">
           <div class="col-md-12 col-lg-12 pb-9 text-center">
-            <h1 class="text-white">Life Is Adventure Make The Best Of It</h1>
-            <p class="text-white mb-0">Planning for a trip? we will organize your best trip with the best destination and within the best budgets!</p>
+            <h1 class="text-white">{{ $banner->title }}</h1>
+            <p class="text-white mb-0">{{ $banner->subtitle }}</p>
           </div>
 
           {{-- <div class="col-md-5 col-lg-4">

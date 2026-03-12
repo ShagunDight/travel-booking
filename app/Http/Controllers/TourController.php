@@ -4,16 +4,18 @@ namespace App\Http\Controllers;
 use App\Models\Tour;
 use App\Models\Category;
 use App\Models\Payment;
+use App\Models\Banner;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 
 class TourController extends Controller
 {
     public function index() {
+        $banner = Banner::where('type', 'Tour')->latest()->first();
         $tours = Tour::with('tour_images')->get();
         $locations = Tour::select('location')->distinct()->orderBy('location', 'asc')->pluck('location');
         $categories = Category::all();
-        return view('tours.index', compact('tours','categories','locations'));
+        return view('tours.index', compact('banner','tours','categories','locations'));
     }
     
     // public function show($slug) { 

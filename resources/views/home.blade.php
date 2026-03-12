@@ -8,30 +8,45 @@
     <section id="home" class="hero-section section-hero">
         <div class="swiper hero-swiper">
             <div class="swiper-wrapper">
-                <div class="swiper-slide">
-                    <img src="https://images.pexels.com/photos/20628922/pexels-photo-20628922/free-photo-of-a-person-standing-near-a-lake-with-view-of-the-chaukhamba-massif-in-the-himalayas-india.jpeg" class="hero-image" alt="Mountain">
-                    <div class="herooverlay"></div>
-                    <div class="hero-content">
-                        <div class="container text-center text-white main-contan-open">
-                            <div class="main-contant-slider">
-                                <h1 class="display-3 fw-bold mb-4 animate-fade-in">Corporate and MICE Tours</h1>
-                                <p>Discover unforgettable travel experiences with India's leading tour operator. We specialize in corporate retreats, incentive programs, and MICE tours.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="swiper-slide">
-                    <img src="https://images.pexels.com/photos/15603666/pexels-photo-15603666/free-photo-of-lake-in-a-mountain-valley.jpeg" class="hero-image" alt="Nainital">
-                    <div class="herooverlay"></div>
+                @forelse($banners as $key => $value)
+                    <div class="swiper-slide">
+                        <img src="{{ asset($value->image) }}" class="hero-image" alt="Mountain">
+                        <div class="herooverlay"></div>
                         <div class="hero-content">
-                            <div class="container text-center text-white">
+                            <div class="container text-center text-white main-contan-open">
                                 <div class="main-contant-slider">
-                                <h1 class="display-3 fw-bold mb-4 animate-fade-in"> Corporate and MICE Tours </h1>
-                                <p>Discover unforgettable travel experiences with India's leading tour operator. We specialize in corporate retreats, incentive programs, and MICE tours.</p>
+                                    <h1 class="display-3 fw-bold mb-4 animate-fade-in">{{ $value->title }}</h1>
+                                    <p>{{ $value->subtitle }}</p>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                @empty
+                    <div class="swiper-slide">
+                        <img src="https://images.pexels.com/photos/20628922/pexels-photo-20628922/free-photo-of-a-person-standing-near-a-lake-with-view-of-the-chaukhamba-massif-in-the-himalayas-india.jpeg" class="hero-image" alt="Mountain">
+                        <div class="herooverlay"></div>
+                        <div class="hero-content">
+                            <div class="container text-center text-white main-contan-open">
+                                <div class="main-contant-slider">
+                                    <h1 class="display-3 fw-bold mb-4 animate-fade-in">Corporate and MICE Tours</h1>
+                                    <p>Discover unforgettable travel experiences with India's leading tour operator. We specialize in corporate retreats, incentive programs, and MICE tours.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide">
+                        <img src="https://images.pexels.com/photos/15603666/pexels-photo-15603666/free-photo-of-lake-in-a-mountain-valley.jpeg" class="hero-image" alt="Nainital">
+                        <div class="herooverlay"></div>
+                            <div class="hero-content">
+                                <div class="container text-center text-white">
+                                    <div class="main-contant-slider">
+                                    <h1 class="display-3 fw-bold mb-4 animate-fade-in"> Corporate and MICE Tours </h1>
+                                    <p>Discover unforgettable travel experiences with India's leading tour operator. We specialize in corporate retreats, incentive programs, and MICE tours.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endforelse
             </div>
             <div class="swiper-pagination"></div>
             <div class="swiper-button-next"></div>
