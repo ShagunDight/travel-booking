@@ -16,6 +16,7 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained()->cascadeOnDelete(); 
             $table->unsignedBigInteger('bookable_id'); 
             $table->string('bookable_type'); 
+            $table->json('traveler_details')->nullable();
             $table->date('check_in')->nullable(); 
             $table->date('check_out')->nullable(); 
             $table->date('booking_date')->nullable(); 

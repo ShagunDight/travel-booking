@@ -33,6 +33,11 @@ class Tour extends Model
         return $this->hasOne(Image::class, 'type_id')->where('type', 3);
     }
 
+    public function images()
+    {
+        return $this->hasMany(Image::class, 'type_id')->where('type', 3);
+    }
+
     public function itineraries()
     {
         return $this->hasMany(Itinerary::class); 

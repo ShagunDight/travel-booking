@@ -60,9 +60,9 @@
                                         </div>
                                     </div>
                                 </div>
-                                @php
+                                {{-- @php
                                     [$checkIn, $checkOut] = array_map('trim', explode('to', $data['date_range'] ?? ''));
-                                    $guestsRaw = $data['guests'] ?? '';
+                                    $guestsRaw = $_GET['guests'] ?? '';
                                     preg_match('/(\d+)\s*Guests?\s*(\d+)\s*Room?/i', $guestsRaw, $matches);
                                     $guests = $matches[1] ?? 0;
                                     $rooms  = $matches[2] ?? 0;
@@ -78,7 +78,7 @@
                                     $discount = $totalPrice * 0.1;
                                     $priceAfterDiscount = $totalPrice - $discount;
                                     $finalAmount = $priceAfterDiscount + 350;
-                                @endphp
+                                @endphp --}}
                                 <div class="row g-4">
                                     <div class="col-lg-4">
                                         <div class="bg-light py-3 px-4 rounded-3">
@@ -423,30 +423,6 @@
                                 </div>
                             </div>
                         </div>
-
-                        {{-- <div class="col-md-6 col-xl-12">
-                            <div class="card shadow">
-                                <div class="card-header border-bottom">
-                                    <div class="cardt-title">
-                                        <h5 class="mb-0">Offer &amp; Discount</h5>
-                                    </div>
-                                </div>
-                                <div class="card-body">
-                                    <div class="bg-light rounded-2 p-3">
-                                        <div class="form-check form-check-inline mb-0">
-                                            <input class="form-check-input" type="radio" name="discountOptions" id="discount1" value="option1" checked="">
-                                            <label class="form-check-label h5 mb-0" for="discount1">GSTBOOK</label>
-                                            <p class="mb-1 small">Congratulations! You have saved <i class="fa fa-inr"></i>230 with GSTBOOK.</p>
-                                            <h6 class="mb-0 text-success">-<i class="fa fa-inr"></i>230</h6>
-                                        </div>
-                                    </div>
-                                    <div class="input-group mt-3">
-                                        <input class="form-control form-control" placeholder="Coupon code">
-                                        <button type="button" class="btn btn-primary">Apply</button>
-                                    </div>
-                                </div>	
-                            </div>
-                        </div> --}}
                         <div class="col-md-6 col-xl-12">
                             <div class="card shadow">
                                 <div class="card-header border-bottom">

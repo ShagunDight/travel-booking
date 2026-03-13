@@ -43,10 +43,11 @@ class TourController extends Controller
             'exclusions' => 'nullable|array',
             'policy'     => 'nullable|array',
             'itinerary' => 'nullable|array',
+            'popular' => 'nullable|boolean',
             // 'stops'=>'required|array|min:1',
             // 'stops.*.location'=>'required|string',
         ]); 
-        
+        $data['popular'] = $request->has('popular') ? 1 : 0;
         $tour = Tour::create($data);
 
         // Image
@@ -136,10 +137,11 @@ class TourController extends Controller
             'exclusions' => 'nullable|array', 
             'policy' => 'nullable|array', 
             'itinerary' => 'nullable|array',
+            'popular' => 'nullable|boolean',
             // 'stops'=>'required|array|min:1',
             // 'stops.*.location'=>'required|string',
         ]);
-
+        $data['popular'] = $request->has('popular') ? 1 : 0;
         $tour->update($data);
 
         // Image

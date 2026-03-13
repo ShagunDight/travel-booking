@@ -233,16 +233,16 @@
         <div class="container">
             <h2 class="text-center mb-5">Top-Selling Holiday Packages</h2>
             <div class="row g-4">
-                @foreach($packages as $package)
+                @foreach($packages as $value)
                     <div class="col-md-6 col-lg-4">
                         <div class="card h-100 shadow-sm hover-card">
 
-                            <img src="{{ asset($package->package_images->url ?? 'images/default.jpg') }}" class="card-img-top package-img" alt="{{ $package->name }}">
+                            <img src="{{ asset($value->tour_images->url ?? 'images/default.jpg') }}" class="card-img-top package-img" alt="{{ $value->name }}">
                             <div class="card-body">
-                                <h5 class="card-title">{{ $package->name }}</h5>
+                                <h5 class="card-title">{{ $value->name }}</h5>
                                 <div class="rating-plan">
                                     <div class="rating-day">
-                                        <p class="text-muted">{{ $package->duration }}</p>
+                                        <p class="text-muted">{{ $value->duration }}</p>
                                     </div>
                                     <div class="mb-2">
                                         <span class="text-warning">★★★★★</span>
@@ -252,12 +252,12 @@
 
                                 <div class="d-flex justify-content-between align-items-center mb-3">
                                     <h4 class="text-price-primary mb-0">
-                                        <i class="fa fa-inr"></i>{{ $package->price }}
+                                        <i class="fa fa-inr"></i>{{ $value->price }}
                                     </h4>
                                     <small class="text-muted">per person</small>
                                 </div>
 
-                                <button type="button" onclick="window.location.href='{{ route('tour.booking',$package->id) }}'" class="btn bg-custom-blue custom-number-name w-100">
+                                <button type="button" onclick="window.location.href='{{ route('tours.tour_booking',$value->id) }}'" class="btn bg-custom-blue custom-number-name w-100">
                                         Book Now
                                 </button>
                             </div>

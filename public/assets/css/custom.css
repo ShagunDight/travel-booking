@@ -280,3 +280,7 @@
     padding: 0px 100px;
 }
 /* booking */
+
+.w-40 {
+  width: 40% !important;
+}

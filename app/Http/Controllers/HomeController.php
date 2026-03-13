@@ -17,7 +17,7 @@ class HomeController extends Controller
     public function index() {
         return view('home', [
             'banners' => Banner::where('type', 'Home')->get(),
-            'packages' => Package::where('popular', 1)->with('package_images')->latest()->take(8)->get(),
+            'packages' => Tour::where('popular', 1)->with('tour_images')->latest()->take(8)->get(),
             'hotels' => Property::where('featured', 1)->latest()->take(6)->get(),
             'indianDestinations' => City::where('country', 'IN')->take(12)->get(),
             'internationalDestinations' => City::where('country', '!=', 'IN')->take(4)->get(),
