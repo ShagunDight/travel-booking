@@ -128,59 +128,59 @@
 
             <!-- Navigation -->
             <nav class="nav flex-column px-2">
-                <a href="{{ url('/admin/dashboard') }}" 
-                class="nav-link text-white rounded-3 mb-2 {{ request()->is('admin/dashboard') ? 'active bg-primary' : '' }}">
+                <a href="{{ url('/admin/dashboard') }}" class="nav-link text-white rounded-3 mb-2 {{ request()->is('admin/dashboard') ? 'active bg-primary' : '' }}">
                     <i class="bi bi-speedometer2 me-2"></i> Dashboard
                 </a>
-                <a href="/admin/banners" 
-                class="nav-link text-white rounded-3 mb-2 {{ request()->is('admin/banners*') ? 'active bg-primary' : '' }}">
+
+                <a href="/admin/banners" class="nav-link text-white rounded-3 mb-2 {{ request()->is('admin/banners*') ? 'active bg-primary' : '' }}">
                     <i class="bi bi-image me-2"></i> Banners
                 </a>
-                <a href="/admin/hotels" 
-                class="nav-link text-white rounded-3 mb-2 {{ request()->is('admin/hotels*') ? 'active bg-primary' : '' }}">
+
+                <a href="/admin/hotels" class="nav-link text-white rounded-3 mb-2 {{ request()->is('admin/hotels*') ? 'active bg-primary' : '' }}">
                     <i class="bi bi-building me-2"></i> Hotels
                 </a>
-                <a href="/admin/rooms" 
-                class="nav-link text-white rounded-3 mb-2 {{ request()->is('admin/rooms*') ? 'active bg-primary' : '' }}">
+
+                <a href="/admin/rooms" class="nav-link text-white rounded-3 mb-2 {{ request()->is('admin/rooms*') ? 'active bg-primary' : '' }}">
                     <i class="bi bi-door-open me-2"></i> Rooms
                 </a>
+
                 <a href="/admin/categories" class="nav-link text-white rounded-3 mb-2 {{ request()->is('admin/categories*') ? 'active bg-primary' : '' }}">
                     <i class="bi bi-key me-2"></i> Categories
                 </a>
-                <a href="/admin/tours" 
-                class="nav-link text-white rounded-3 mb-2 {{ request()->is('admin/tours*') ? 'active bg-primary' : '' }}">
+
+                <a href="/admin/tours" class="nav-link text-white rounded-3 mb-2 {{ request()->is('admin/tours*') ? 'active bg-primary' : '' }}">
                     <i class="bi bi-map me-2"></i> Tours
                 </a>
-                <a href="/admin/taxi" 
-                class="nav-link text-white rounded-3 mb-2 {{ request()->is('admin/taxi*') ? 'active bg-primary' : '' }}">
+
+                <a href="/admin/taxi" class="nav-link text-white rounded-3 mb-2 {{ request()->is('admin/taxi*') ? 'active bg-primary' : '' }}">
                     <i class="bi bi-map me-2"></i> Taxi-inquiries
                 </a>
-                <a href="/admin/packages" 
-                class="nav-link text-white rounded-3 mb-2 {{ request()->is('admin/packages*') ? 'active bg-primary' : '' }}">
+
+                {{-- <a href="/admin/packages" class="nav-link text-white rounded-3 mb-2 {{ request()->is('admin/packages*') ? 'active bg-primary' : '' }}">
                     <i class="bi bi-box-seam me-2"></i> Packages
-                </a>
-                <a href="/admin/cities" 
-                class="nav-link text-white rounded-3 mb-2 {{ request()->is('admin/cities*') ? 'active bg-primary' : '' }}">
+                </a> --}}
+
+                <a href="/admin/cities" class="nav-link text-white rounded-3 mb-2 {{ request()->is('admin/cities*') ? 'active bg-primary' : '' }}">
                     <i class="bi bi-geo-alt me-2"></i> Destinations
                 </a>
-                <a href="/admin/countries" 
-                class="nav-link text-white rounded-3 mb-2 {{ request()->is('admin/countries*') ? 'active bg-primary' : '' }}">
+
+                <a href="/admin/countries" class="nav-link text-white rounded-3 mb-2 {{ request()->is('admin/countries*') ? 'active bg-primary' : '' }}">
                     <i class="bi bi-geo-alt me-2"></i> Country
                 </a>
-                <a href="/admin/bookings" 
-                class="nav-link text-white rounded-3 mb-2 {{ request()->is('admin/bookings*') ? 'active bg-primary' : '' }}">
+
+                <a href="/admin/bookings" class="nav-link text-white rounded-3 mb-2 {{ request()->is('admin/bookings*') ? 'active bg-primary' : '' }}">
                     <i class="bi bi-calendar-check me-2"></i> Bookings
                 </a>
-                <a href="/admin/reviews" 
-                class="nav-link text-white rounded-3 mb-2 {{ request()->is('admin/reviews*') ? 'active bg-primary' : '' }}">
+
+                <a href="/admin/reviews" class="nav-link text-white rounded-3 mb-2 {{ request()->is('admin/reviews*') ? 'active bg-primary' : '' }}">
                     <i class="bi bi-chat-dots me-2"></i> Reviews
                 </a>
-                <a href="/admin/users" 
-                class="nav-link text-white rounded-3 mb-2 {{ request()->is('admin/users*') ? 'active bg-primary' : '' }}">
+
+                <a href="/admin/users" class="nav-link text-white rounded-3 mb-2 {{ request()->is('admin/users*') ? 'active bg-primary' : '' }}">
                     <i class="bi bi-people me-2"></i> Users
                 </a>
-                <a href="/admin/roles" 
-                class="nav-link text-white rounded-3 mb-2 {{ request()->is('admin/roles*') ? 'active bg-primary' : '' }}">
+
+                <a href="/admin/roles" class="nav-link text-white rounded-3 mb-2 {{ request()->is('admin/roles*') ? 'active bg-primary' : '' }}">
                     <i class="bi bi-shield-lock me-2"></i> Roles
                 </a>
                 {{-- <a href="/admin/permissions" class="nav-link text-white rounded-3 mb-2 {{ request()->is('admin/permissions*') ? 'active bg-primary' : '' }}">

@@ -12,6 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('packages', function (Blueprint $table) { 
+            $table->string('location');
             $table->string('duration')->nullable(); // e.g. "5 Days / 4 Nights" 
             $table->text('short_description')->nullable(); // short summary 
         });
@@ -23,7 +24,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('packages', function (Blueprint $table) { 
-            $table->dropColumn(['duration','short_description']); 
+            $table->dropColumn(['location','duration','short_description']); 
         });
     }
 };

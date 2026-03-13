@@ -4,7 +4,7 @@
 <main>
     <section class="pt-0">
         <div class="container">
-            <div class="p-3 p-sm-5 rounded-3" style="background-image: url(assets/images/bg/04.jpg); background-position: center center; background-repeat: no-repeat; background-size: cover;">
+            <div class="p-3 p-sm-5 rounded-3" style="background-image: url(/images/04.jpg); background-position: center center; background-repeat: no-repeat; background-size: cover;">
                 <!-- Banner title -->
                 <div class="row"> 
                     <div class="col-md-8 mx-auto my-5"> 
@@ -71,50 +71,26 @@
         <div class="container">
             <div class="row g-4 align-items-center justify-content-between mb-4">
                 <div class="col-12 col-xl-8">
-                    <h5 class="mb-0">Showing {{ count($tours) }} results</h5>
+                    <h5 class="mb-0">Showing {{ count($packages) }} results</h5>
                 </div>
                 <div class="col-xl-2">
-                    {{-- <form class="form-control-bg-light">
-                        <label class="form-label" for="sort_by">Sort By</label>
-                        <select id="sort_by" class="form-select js-choice" data-search-enabled="false">
-                            <option value="Most Viewed">Most Viewed</option>
-                            <option value="Recently search">Recently search</option>
-                            <option value="Most popular">Most popular</option>
-                            <option value="Top rated">Top rated</option>
-                        </select>
-                    </form> --}}
                 </div>
             </div>
-            {{-- @if(!empty($data['location']))
-                <div class="col-sm-12 col-md-12 col-lg-12 col-xl-12 col-xxl-12">
-                    <div class="vstack gap-4">
-                        <div class="row g-0">
-                            <div class="d-flex justify-content-end p-2 p-xl-0">
-                                <button class="btn btn-primary" id="clearFilter">Clear Filter</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            @endif --}}
             <div class="row g-4">
-                @forelse($tours as $key => $tour)
+                @forelse($packages as $key => $value)
                     <div class="col-md-6 col-xl-4">
                         <div class="card card-hover-shadow pb-0 h-100">
                             <div class="position-relative">
-                                <img src="{{ asset($tour->tour_images->url) }}" class="card-img-top" alt="Card image">
+                                <img src="{{ asset($value->image ?? "/images/tours/default.jpg") }}" class="card-img-top" alt="Card image">
                                 <div class="card-img-overlay d-flex flex-column p-4 z-index-1">
-                                    {{-- <div>
-                                        <span class="badge text-bg-danger">30% Off</span>
-                                        <span class="badge text-bg-dark">Adventure</span>
-                                    </div> --}}
                                     <div class="w-100 mt-auto">
-                                        <span class="badge text-bg-white fs-6">{{ $tour->duration }}</span>
+                                        <span class="badge text-bg-white fs-6">{{ $value->duration }}</span>
                                     </div>
                                 </div>
                             </div>
 
                             <div class="card-body px-3">
-                                <h5 class="card-title mb-0"><a href="{{ route('tours.tour_detail', $tour->id) }}" class="stretched-link">{{ $tour->name }}</a></h5>
+                                <h5 class="card-title mb-0"><a href="{{ route('tours.tour_detail', $value->id) }}" class="stretched-link">{{ $value->name }}</a></h5>
                                 {{-- <span class="small"><i class="far fa-calendar-alt me-2"></i>April 12-17</span> --}}
 
                                 <ul class="nav nav-divider mt-3 mb-0">
@@ -130,12 +106,12 @@
                             <div class="card-footer pt-0">
                                 <div class="d-sm-flex justify-content-sm-between align-items-center flex-wrap">
                                     <div class="hstack gap-2">
-                                        <h5 class="fw-normal text-success mb-0"><i class="fa fa-inr"></i>{{ $tour->price }}</h5>
+                                        <h5 class="fw-normal text-success mb-0"><i class="fa fa-inr"></i>{{ $value->price }}</h5>
                                         <small>/per person</small>
                                         {{-- <span class="text-decoration-line-through"><i class="fa fa-inr"></i>1800</span> --}}
                                     </div>
                                     <div class="mt-2 mt-sm-0">
-                                        <a href="{{ route('tours.tour_detail', $tour->id) }}" class="btn btn-sm btn-primary mb-0">View Details</a>    
+                                        <a href="{{ route('tours.tour_detail', $value->id) }}" class="btn btn-sm btn-primary mb-0">View Details</a>    
                                     </div>
                                 </div>
                             </div>
@@ -156,69 +132,30 @@
                         </div>
                     </div>
                 @endforelse
-                {{-- <div class="col-md-6 col-xl-4">
-                    <div class="card card-hover-shadow pb-0 h-100">
-                        <div class="position-relative">
-                            <img src="assets/images/category/tour/4by3/05.jpg" class="card-img-top" alt="Card image">
-                            <div class="card-img-overlay d-flex flex-column p-4 z-index-1">
-                                <div> <span class="badge text-bg-dark">Honeymoon</span> </div>
-                                <div class="w-100 mt-auto">
-                                    <span class="badge text-bg-white fs-6">6 days / 5 nights</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="card-body px-3">
-                            <h5 class="card-title mb-0"><a href="tour-detail.html" class="stretched-link">Meeru Island Resort (Without Flight)</a></h5>
-                            <span class="small"><i class="far fa-calendar-alt me-2"></i>April 12-17</span>
-                            <ul class="nav nav-divider mt-3 mb-0">
-                                <li class="nav-item h6 fw-normal mb-0">
-                                    <i class="fa-solid fa-hotel text-info me-2"></i>1 Hotel
-                                </li>
-                                <li class="nav-item h6 fw-normal mb-0">
-                                    <i class="fa-solid fa-person-skating text-danger me-2"></i>2 Activities
-                                </li>
-                            </ul>
-                        </div>
-
-                        <div class="card-footer pt-0">
-                            <div class="d-sm-flex justify-content-sm-between align-items-center flex-wrap">
-                                <div class="hstack gap-2">
-                                    <h5 class="fw-normal text-success mb-0">$800</h5>
-                                    <small>/per person</small>
-                                </div>
-                                <div class="mt-2 mt-sm-0">
-                                    <a href="#" class="btn btn-sm btn-primary mb-0">View Details</a>    
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div> --}}
             </div>
 
             <div class="row">
                 <div class="col-12">
-                    @if ($tours->hasPages())
+                    @if ($packages->hasPages())
                         <nav class="d-flex justify-content-center" aria-label="navigation">
                             <ul class="pagination pagination-primary-soft d-inline-block d-md-flex rounded mb-0">
                                 
                                 {{-- Previous Page Link --}}
-                                @if ($tours->onFirstPage())
+                                @if ($packages->onFirstPage())
                                     <li class="page-item mb-0 disabled">
                                         <span class="page-link"><i class="fa-solid fa-angle-left"></i></span>
                                     </li>
                                 @else
                                     <li class="page-item mb-0">
-                                        <a class="page-link" href="{{ $tours->previousPageUrl() }}" rel="prev">
+                                        <a class="page-link" href="{{ $packages->previousPageUrl() }}" rel="prev">
                                             <i class="fa-solid fa-angle-left"></i>
                                         </a>
                                     </li>
                                 @endif
 
                                 {{-- Pagination Elements --}}
-                                @foreach ($tours->links()->elements[0] ?? [] as $page => $url)
-                                    @if ($page == $tours->currentPage())
+                                @foreach ($packages->links()->elements[0] ?? [] as $page => $url)
+                                    @if ($page == $packages->currentPage())
                                         <li class="page-item mb-0 active">
                                             <span class="page-link">{{ $page }}</span>
                                         </li>
@@ -230,9 +167,9 @@
                                 @endforeach
 
                                 {{-- Next Page Link --}}
-                                @if ($tours->hasMorePages())
+                                @if ($packages->hasMorePages())
                                     <li class="page-item mb-0">
-                                        <a class="page-link" href="{{ $tours->nextPageUrl() }}" rel="next">
+                                        <a class="page-link" href="{{ $packages->nextPageUrl() }}" rel="next">
                                             <i class="fa-solid fa-angle-right"></i>
                                         </a>
                                     </li>

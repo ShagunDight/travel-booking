@@ -82,7 +82,7 @@ Route::middleware(['auth','is_admin'])->prefix('admin')->as('admin.')->group(fun
 //  my code
 
 // TOUR
-Route::get('/tour-booking/{id}', [TourController::class,'tour_booking'])->name('tour.booking');
+// Route::get('/tour-booking/{id}', [TourController::class,'tour_booking'])->name('tour.booking');
 
 Route::get('/tour-booking-success/{order_id}', [\App\Http\Controllers\TourController::class,'bookingSuccess'])
 ->name('tour.booking.success');

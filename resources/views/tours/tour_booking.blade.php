@@ -29,23 +29,23 @@
             </div>
         </div>
     </section>
-@if($tour)
+    @if($tour)
 
-@php
-$durationRaw = $tour->duration ?? '';
-preg_match('/(\d+)\s*Days?\s*\/?\s*(\d+)\s*Nights?/i', $durationRaw, $matches);
+        @php
+        $durationRaw = $tour->duration ?? '';
+        preg_match('/(\d+)\s*Days?\s*\/?\s*(\d+)\s*Nights?/i', $durationRaw, $matches);
 
-$days = $matches[1] ?? 0;
-$nights  = $matches[2] ?? 0;
+        $days = $matches[1] ?? 0;
+        $nights  = $matches[2] ?? 0;
 
-$totalPrice = $tour->price;
-$discount = $totalPrice * 0.1;
-$priceAfterDiscount = $totalPrice - $discount;
-$finalAmount = $priceAfterDiscount + 350;
+        $totalPrice = $tour->price;
+        $discount = $totalPrice * 0.1;
+        $priceAfterDiscount = $totalPrice - $discount;
+        $finalAmount = $priceAfterDiscount + 350;
 
-@endphp
+        @endphp
 
-@endif
+    @endif
     <section>
         <div class="container">
             <div id="stepper" class="bs-stepper stepper-outline">
@@ -97,8 +97,6 @@ $finalAmount = $priceAfterDiscount + 350;
                                                         <h5 class="card-title mb-1"><a href="#">{{ $tour->name }}</a></h5>
                                                         <ul class="nav nav-divider small mb-0 mt-2">
                                                             <li class="nav-item mb-1"><i class="far fa-calendar-alt me-2"></i>{{ $tour->duration }}</li>
-                                                            {{-- <li class="nav-item mb-1"><i class="fa-solid fa-bed me-2"></i>1 Room</li>
-                                                            <li class="nav-item mb-1"><i class="bi bi-people-fill me-2"></i>2 Guests</li> --}}
                                                             <li class="nav-item mb-1"><i class="bi bi-geo-alt-fill me-2"></i>From {{ $tour->starting_location }}</li>
                                                         </ul>
                                                     </div>
@@ -106,10 +104,10 @@ $finalAmount = $priceAfterDiscount + 350;
                                             </div>
                                         </div>
                             
-                                        <div class="card border">
+                                        {{-- <div class="card border">
                                             <div class="card-header border-bottom d-flex justify-content-between">
                                                 <h5 class="mb-0">Hotel Details</h5>
-                                                {{-- <a href="#" class="btn btn-link p-0 mb-0 text-primary-hover text-reset text-decoration-underline">View details</a> --}}
+                                                <a href="#" class="btn btn-link p-0 mb-0 text-primary-hover text-reset text-decoration-underline">View details</a>
                                             </div>
                                             <div class="card-body">
                                                 <div class="row">
@@ -166,18 +164,22 @@ $finalAmount = $priceAfterDiscount + 350;
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div> --}}
 
                                         <div class="card border">
                                             <div class="card-header border-bottom d-flex justify-content-between">
-                                                <h5 class="mb-0">Transfer Details</h5>
-                                                <a href="#" class="btn btn-link p-0 mb-0 text-primary-hover text-reset text-decoration-underline">View details</a>
+                                                <h5 class="mb-0"> Details</h5>
                                             </div>
                                             <div class="card-body">
-                                                <div class="d-flex gap-1 justify-content-between flex-wrap">
-                                                    <h6 class="mb-0">Private Transfer</h6>
-                                                    <p class="mb-0">Vehicle type: <span class="h6 fw-light">Sedan - AC</span></p>
-                                                    <h6 class="mb-0 fw-normal">12 April 2022</h6>
+                                                <div class="d-flex gap-1 justify-content-between flex-wrap mt-3">
+                                                    <div class="form-control-bg-light w-40">
+                                                        <label class="form-label">Traveling Date</label>
+                                                        <input type="text" id="travel_date" class="form-control flatpickr" data-date-format="d M Y" readonly>
+                                                    </div>
+                                                    <div class="form-control-bg-light w-40">
+                                                        <label class="form-label">No of Travelers</label>
+                                                        <input type="number" id="no_of_travelers" name="no_of_travelers" value="1" min="1" max="9" class="form-control">
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
@@ -222,10 +224,6 @@ $finalAmount = $priceAfterDiscount + 350;
                                     <div class="vstack gap-4">
                                         <h4 class="mb-0">Traveler Detail</h4>
                                         <hr class="my-0">
-                                        {{-- <div class="alert alert-warning d-flex" role="alert">
-                                            <span class="alert-heading h5 mb-0 me-2"><i class="bi bi-exclamation-octagon-fill"></i></span>
-                                            A customer passport is mandatory. The passport must have 2 blank pages and 6-month validity.
-                                        </div> --}}
                                         <div class="card border">
                                             <div class="card-header border-bottom">
                                                 <h5 class="mb-0">Traveler</h5>
@@ -302,14 +300,9 @@ $finalAmount = $priceAfterDiscount + 350;
                                     <div class="vstack gap-4">
                                         <h4 class="mb-0">Payment options</h4>
                                         <hr class="my-0">
-                                        <div class="card border">
+                                        {{-- <div class="card border">
                                             <div class="card-header border-bottom d-sm-flex justify-content-between align-items-center">
                                                 <h5 class="mb-2 mb-sm-0">Credit or Debit Card</h5>
-                                                <ul class="list-inline my-0">
-                                                    <li class="list-inline-item"> <a href="#"><img src="assets/images/element/visa.svg" class="h-30px" alt=""></a></li>
-                                                    <li class="list-inline-item"> <a href="#"><img src="assets/images/element/mastercard.svg" class="h-30px" alt=""></a></li>
-                                                    <li class="list-inline-item"> <a href="#"><img src="assets/images/element/expresscard.svg" class="h-30px" alt=""></a></li>
-                                                </ul>
                                             </div>
                                             <div class="card-body">
                                                 <div class="row g-4">
@@ -346,7 +339,7 @@ $finalAmount = $priceAfterDiscount + 350;
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
+                                        </div> --}}
 
                                         <div class="card border">
                                             <div class="card-header border-bottom">
@@ -360,7 +353,7 @@ $finalAmount = $priceAfterDiscount + 350;
                                         </div>
                                         <div class="d-flex justify-content-between">
                                             <button class="btn btn-secondary prev-btn mb-0">Previous</button>
-                                            <button class="btn btn-success next-btn mb-0">Pay now</button>
+                                            <button class="btn btn-success next-btn mb-0">Book now</button>
                                         </div>
                                     </div>
                                 </div>
@@ -377,16 +370,20 @@ $finalAmount = $priceAfterDiscount + 350;
                                     <div class="card-body">
                                         <ul class="list-group list-group-borderless">
                                             <li class="list-group-item d-flex justify-content-between align-items-center pt-0">
-                                                <span class="h6 fw-light mb-0">Base Price</span>
-                                                <span class="fs-5"><i class="fa fa-inr"></i>{{ $totalPrice }}</span>
+                                                <span class="h6 fw-light mb-0">Price Per Person</span>
+                                                <span class="fs-5"><i class="fa fa-inr"></i><span id="pricePerPerson">{{ $totalPrice }}</span></span>
+                                            </li>
+                                            <li class="list-group-item d-flex justify-content-between align-items-center pb-0">
+                                                <span class="h6 fw-light mb-0">No of Travelers</span>
+                                                <span class="fs-5" id="noTravels">1</span>
                                             </li>
                                             <li class="list-group-item d-flex justify-content-between align-items-center">
                                                 <span class="h6 fw-light mb-0">Total Discount<span class="badge text-bg-danger smaller mb-0 ms-2">10% off</span></span>
-                                                <span class="fs-5 text-success">-<i class="fa fa-inr"></i>{{ $discount }}</span>	
+                                                <span class="fs-5 text-success">-<i class="fa fa-inr"></i><span id="discount">{{ $discount }}</span></span>
                                             </li>
                                             <li class="list-group-item d-flex justify-content-between align-items-center pb-0">
-                                                <span class="h6 fw-light mb-0">Taxes % Fees</span>
-                                                <span class="fs-5"><i class="fa fa-inr"></i>350</span>
+                                                <span class="h6 fw-light mb-0">Taxes & Fees</span>
+                                                <span class="fs-5"><i class="fa fa-inr"></i><span id="taxes">350</span></span>
                                             </li>
                                         </ul>
                                     </div>
@@ -394,7 +391,7 @@ $finalAmount = $priceAfterDiscount + 350;
                                     <div class="card-footer border-top">
                                         <div class="d-flex justify-content-between align-items-center">
                                             <span class="h5 mb-0">Payable Now</span>
-                                            <span class="h5 mb-0"><i class="fa fa-inr"></i>{{ $finalAmount }}</span>
+                                            <span class="h5 mb-0"><i class="fa fa-inr"></i><span id="finalAmount">{{ $finalAmount }}</span></span>
                                             <input type="hidden" id="payable_id" value="{{ $tour->id }}">
                                             <input type="hidden" id="payable_type" value="tour">
                                             <input type="hidden" id="final_amount" value="{{ $finalAmount }}">
@@ -422,6 +419,34 @@ $finalAmount = $priceAfterDiscount + 350;
             activeStep.classList.add('dstepper-block');
         }
     });
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const pricePerPerson = parseFloat(document.getElementById('pricePerPerson').innerText);
+        const discountBase = parseFloat(document.getElementById('discount').innerText);
+        const taxes = parseFloat(document.getElementById('taxes').innerText);
+
+        const noTravelsEl = document.getElementById('noTravels');
+        const finalAmountEl = document.getElementById('finalAmount');
+        const noOfTravelersInput = document.getElementById('no_of_travelers');
+
+        noOfTravelersInput.addEventListener('input', function () {
+            let travelers = parseInt(this.value) || 1;
+
+            // Update traveler count
+            noTravelsEl.innerText = travelers;
+
+            // Calculate totals
+            let baseTotal = pricePerPerson * travelers;
+            let discount = discountBase;
+            let finalAmount = baseTotal - discount + taxes;
+
+            // Update DOM
+            document.getElementById('discount').innerText = discount.toFixed(2);
+            finalAmountEl.innerText = finalAmount.toFixed(2);
+            document.getElementById('final_amount').value = finalAmount.toFixed(2);
+        });
+    });
+
 </script>
 
 <!-- Payment -->

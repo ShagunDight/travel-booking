@@ -35,27 +35,38 @@
 			</div>
 			<div class="row mt-md-5">
 				<div class="col-12">
-					<div class="splide splide-main mb-3 splide--fade splide--ltr splide--draggable is-active" data-splide="{&quot;type&quot; : &quot;fade&quot;,&quot;autoplay&quot;: true,&quot;heightRatio&quot;:0.5,&quot;pagination&quot;:false,&quot;arrows&quot;:false,&quot;cover&quot;:true,&quot;lazyLoad&quot;:&quot;sequential&quot;}" id="splide02" style="visibility: visible;">
-						<div class="splide__track" id="splide02-track" style="">
-							<ul class="splide__list" id="splide02-list">
-								<li class="splide__slide rounded" id="splide02-slide01" aria-hidden="true" tabindex="-1" style="width: 1170px; height: 585px; transition: opacity 400ms cubic-bezier(0.42, 0.65, 0.27, 0.99); background: url(&quot;{{ asset($tour->tour_images->url)}}&quot;) center center / cover no-repeat;">
-									<img src="{{ asset($tour->tour_images->url ?? 'images/tours/default.jpg')}}" alt="{{$tour->tour_images->alt}}" style="display: none;">
-									<a href="assets/images/gallery/04.jpg" class="stretched-link" data-glightbox="" data-gallery="banner"></a>
-								</li>
+					<!-- Main Slider -->
+					<div id="splide02" class="splide splide-main mb-3" data-splide='{"type":"fade","autoplay":true,"heightRatio":0.5,"pagination":false,"arrows":false,"cover":true,"lazyLoad":"sequential"}'>
+						<div class="splide__track">
+							<ul class="splide__list">
+								@foreach($tour->images as $key => $value)	
+									<li class="splide__slide rounded" style="background: url('{{ asset($value->url ?? "images/tours/default.jpg") }}') center center / cover no-repeat;">
+										<img src="{{ asset($value->url ?? 'images/tours/default.jpg') }}" alt="{{ $value->alt ?? 'Tour Image' }}" style="display:none;">
+										<a href="{{ asset($value->url ?? 'images/tours/default.jpg') }}" class="stretched-link" data-glightbox data-gallery="banner"></a>
+									</li>
+								@endforeach
 							</ul>
 						</div>
 					</div>
-					<div class="splide splide-thumb splide--slide splide--ltr splide--draggable splide--nav is-active" data-splide="{&quot;rewind&quot;:true,&quot;fixedWidth&quot;:200,&quot;fixedHeight&quot;:120,&quot;isNavigation&quot;:true,&quot;gap&quot;:20,&quot;focus&quot;:&quot;center&quot;,&quot;pagination&quot;:false,&quot;cover&quot;:true,&quot;lazyLoad&quot;:&quot;sequential&quot;,&quot;breakpoints&quot;:{&quot;600&quot;:{&quot;fixedWidth&quot;:150,&quot;fixedHeight&quot;:80}}}" id="splide01" style="visibility: visible;">
-						<div class="splide__track" id="splide01-track">
-							<ul class="splide__list" id="splide01-list" style="transform: translateX(-570px);">
-								<li class="splide__slide" id="splide01-slide01" aria-hidden="true" tabindex="-1" role="button" aria-label="Go to slide 1" aria-controls="splide02-slide01" style="margin-right: 20px; width: 200px; height: 120px; background: url(&quot;{{ asset($tour->tour_images->url)}}&quot;) center center / cover no-repeat;">
-									<img src="{{ asset($tour->tour_images->url)}}" alt="{{ url($tour->tour_images->alt)}}" style="display: none;">
-								</li>
+
+					<!-- Thumbnail Slider -->
+					<div id="splide01" class="splide splide-thumb" data-splide='{"rewind":true,"fixedWidth":200,"fixedHeight":120,"isNavigation":true,"gap":20,"focus":"center","pagination":false,"cover":true,"lazyLoad":"sequential","breakpoints":{"600":{"fixedWidth":150,"fixedHeight":80}}}'>
+						<div class="splide__track">
+							<ul class="splide__list">
+								@foreach($tour->images as $key => $value)
+									<li class="splide__slide" style="background: url('{{ asset($value->url ?? "images/tours/default.jpg") }}') center center / cover no-repeat;">
+										<img src="{{ asset($value->url ?? 'images/tours/default.jpg') }}" alt="{{ $value->alt ?? 'Tour Image' }}" style="display:none;">
+									</li>
+								@endforeach
 							</ul>
 						</div>
 						<div class="splide__arrows">
-							<button class="splide__arrow  splide__arrow--prev p-splide__arrow--prev bg-primary" aria-controls="splide01-track" aria-label="Previous slide"><span class="spi-angle-left text-white"><i class="fa-solid fa-fw fa-angle-left"></i></span></button>
-							<button class="splide__arrow splide__arrow--next p-splide__arrow--next bg-primary" aria-controls="splide01-track" aria-label="Go to first slide"><span class="spi-angle-right text-white"><i class="fa-solid fa-fw fa-angle-right"></i></span></button>
+							<button class="splide__arrow splide__arrow--prev bg-primary" aria-label="Previous slide">
+								<i class="fa-solid fa-angle-left text-white"></i>
+							</button>
+							<button class="splide__arrow splide__arrow--next bg-primary" aria-label="Next slide">
+								<i class="fa-solid fa-angle-right text-white"></i>
+							</button>
 						</div>
 					</div>
 				</div>

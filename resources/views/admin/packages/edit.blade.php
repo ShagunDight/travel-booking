@@ -100,6 +100,11 @@
                               rows="4">{{ old('description',$package->description) }}</textarea>
                     @error('description') <div class="invalid-feedback">{{ $message }}</div> @enderror
                 </div>
+                <div class="mb-3">
+                    <label class="form-label fw-semibold">Location <span class="text-danger">*</span></label>
+                    <input type="text" name="location" class="form-control rounded-3 shadow-sm @error('location') is-invalid @enderror" value="{{ old('location',$package->location) }}" required>
+                    @error('location') <div class="invalid-feedback">{{ $message }}</div> @enderror
+                </div>
                 <div id="roomsSection" class="mb-3">
                     <label class="form-label fw-semibold">Select Rooms</label>
                     @foreach($rooms as $room)
@@ -195,6 +200,10 @@ $(document).ready(function () {
                 minlength: 2,
                 maxlength: 255
             },
+            location: {
+                required: true,
+                minlength: 2
+            },
             price: {
                 required: true,
                 number: true,
@@ -234,6 +243,10 @@ $(document).ready(function () {
                 required: "Please enter slug",
                 minlength: "Slug must be at least 2 characters",
                 maxlength: "Slug cannot exceed 255 characters"
+            },
+            location: {
+                required: "Please enter location",
+                minlength: "Location must be at least 2 characters"
             },
             price: {
                 required: "Please enter price",

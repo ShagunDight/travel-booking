@@ -5,6 +5,7 @@ use App\Models\Tour;
 use App\Models\Category;
 use App\Models\Payment;
 use App\Models\Banner;
+use App\Models\Package;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 
@@ -12,7 +13,7 @@ class TourController extends Controller
 {
     public function index() {
         $banner = Banner::where('type', 'Tour')->latest()->first();
-        $tours = Tour::with('tour_images')->get();
+        $tours = Tour::where('popular', 1)->with('tour_images')->latest()->get();
         $locations = Tour::select('location')->distinct()->orderBy('location', 'asc')->pluck('location');
         $categories = Category::all();
         return view('tours.index', compact('banner','tours','categories','locations'));
@@ -46,8 +47,7 @@ class TourController extends Controller
 
     public function tour_detail($id)
     {
-        $tour = Tour::with(['tour_images','itineraries','inclusions','exclusions','policies'])->find($id);
-        // return $tour;
+        $tour = Tour::with(['images','itineraries','inclusions','exclusions','policies'])->find($id);
 
         return view('tours.tour_detail', compact('tour'));
     }
@@ -61,17 +61,15 @@ class TourController extends Controller
         return view('tours.tour_booking', compact('tour'));
     }
 
-    // My code
-
     public function bookingSuccess($order_id)
     {
-        $payment = Payment::with('tour.tour_images')->where('razorpay_order_id', $order_id)->first();
+        $payment = Payment::with('tour_images')->where('razorpay_order_id', $order_id)->first();
 
         if (!$payment) {
             abort(404, "Payment not found.");
         }
 
-        $tour = $payment->tour; 
+        $tour = $payment->tour;
         $user = auth()->user();
 
         return view('tours.tour_bookingsuccess', compact('tour', 'payment', 'user'));

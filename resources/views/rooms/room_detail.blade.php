@@ -117,8 +117,15 @@
                     preg_match('/(\d+)\s*Guests?\s*(\d+)\s*Room?/i', $guestsRaw, $matches);
                     $guests = $matches[1] ?? 0;
                     $rooms  = $matches[2] ?? 0;
-                    
-                    $totalPrice = $value->price_per_night * $rooms;
+
+                    $year = now()->year;
+                    $checkInDate  = \Carbon\Carbon::createFromFormat('d M Y', "$checkIn $year");
+                    $checkOutDate = \Carbon\Carbon::createFromFormat('d M Y', "$checkOut $year");
+
+                    $nights = $checkInDate->diffInDays($checkOutDate);
+                    $days   = $nights + 1;
+
+                    $totalPrice = $value->price_per_night * $nights;
                     $finalPrice = ($totalPrice - 200) + 100;
                 @endphp -->
                 <aside class="col-xl-5 d-none d-xl-block">
@@ -144,21 +151,17 @@
                             <ul class="list-group list-group-borderless mb-3">
                                 <li class="list-group-item px-2 d-flex justify-content-between">
                                 <span class="h6 fw-light mb-0">
-                                    <span id="roomPrice"><i class="fa fa-inr"></i>{{ $value->price_per_night }}</span> x {{$rooms}} Nights
+                                    <span id="roomPrice"><i class="fa fa-inr"></i>0</span> x <span>{{$nights}}</span> Nights
                                 </span>
-                                    <span id="totalPrice" class="h6 fw-light mb-0"><i class="fa fa-inr"></i>{{ $totalPrice }}</span>
+                                    <span id="totalPrice" class="h6 fw-light mb-0"><i class="fa fa-inr"></i>0</span>
                                 </li>
                                 <li class="list-group-item px-2 d-flex justify-content-between">
                                     <span class="h6 fw-light mb-0">10% campaign discount</span>
-                                    <span class="h6 fw-light mb-0">-<i class="fa fa-inr"></i>200</span>
-                                </li>
-                                <li class="list-group-item px-2 d-flex justify-content-between">
-                                    <span class="h6 fw-light mb-0">Services Fee</span>
-                                    <span class="h6 fw-light mb-0"><i class="fa fa-inr"></i>100</span>
+                                    {{-- <span class="h6 fw-light mb-0" id="discount">0</span> --}}
                                 </li>
                                 <li class="list-group-item bg-light d-flex justify-content-between rounded-2 px-2 mt-2">
                                     <span class="h5 fw-normal mb-0 ps-1">Total</span>
-                                    <span id="finalPrice" class="h5 fw-normal mb-0"><i class="fa fa-inr"></i>{{ $finalPrice }}</span>
+                                    <span id="finalPrice" class="h5 fw-normal mb-0"><i class="fa fa-inr"></i>0</span>
                                 </li>
                             </ul>
                             <div class="d-grid gap-2">
@@ -185,13 +188,10 @@ document.querySelectorAll('.selectRoom').forEach(function(btn){
         var guests = {{ $guests ?? 1 }};
         
         var total = price * nights;
-        var discount = total * 0.1;
-        var afterDiscount = total - discount;
-        var finalAmount = afterDiscount + 350;
 
         document.getElementById('roomPrice').innerHTML = '<i class="fa fa-inr"></i>' + price;
         document.getElementById('totalPrice').innerHTML = '<i class="fa fa-inr"></i>' + total;
-        document.getElementById('finalPrice').innerHTML = '<i class="fa fa-inr"></i>' + finalAmount;
+        document.getElementById('finalPrice').innerHTML = '<i class="fa fa-inr"></i>' + total;
 
         var continueBtn = document.getElementById('continueBooking');
 continueBtn.href = `{{ url('hotels/hotel_booking') }}/{{ $hotel->id }}?room_id=${roomId}&nights=${nights}&guests=${guests}`;
@@ -207,9 +207,7 @@ document.querySelectorAll('.selectRoom').forEach(function(btn){
         
         // Calculate (matching your summary logic)
         var total = price * nights;
-        var discount = 200; // or total * 0.1 based on your logic
-        var serviceFee = 100;
-        var finalAmount = (total - discount) + serviceFee;
+        var finalAmount = total;
 
         // Update UI Summary
         document.getElementById('roomPrice').innerHTML = '<i class="fa fa-inr"></i>' + price;
