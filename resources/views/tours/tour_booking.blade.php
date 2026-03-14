@@ -21,7 +21,7 @@
                                 </div>
                             </div>	
                             <div class="col-sm-3 text-end d-none d-sm-block">
-                                <img src="assets/images/element/17.svg" class="mb-n4" alt="">
+                                {{-- <img src="assets/images/element/17.svg" class="mb-n4" alt=""> --}}
                             </div>
                         </div>
                     </div>
@@ -103,68 +103,6 @@
                                                 </div>
                                             </div>
                                         </div>
-                            
-                                        {{-- <div class="card border">
-                                            <div class="card-header border-bottom d-flex justify-content-between">
-                                                <h5 class="mb-0">Hotel Details</h5>
-                                                <a href="#" class="btn btn-link p-0 mb-0 text-primary-hover text-reset text-decoration-underline">View details</a>
-                                            </div>
-                                            <div class="card-body">
-                                                <div class="row">
-                                                    <div class="col-sm-8">
-                                                        <h6>Courtyard by Marriott New York</h6>
-                                                        <h6 class="mb-1 fw-light"><span class="text-secondary">Room:</span> Deluxe Pool View with Breakfast</h6>
-                                                        <ul class="list-inline mb-0">
-                                                            <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
-                                                            <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
-                                                            <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
-                                                            <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
-                                                            <li class="list-inline-item me-0 small"><i class="fas fa-star-half-alt text-warning"></i></li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="col-sm-4">
-                                                        <h6 class="mb-0">12 April 2022</h6>
-                                                        <p class="text-success mb-0">Breakfast Included</p>
-                                                    </div>
-                                                </div>
-                                                <hr>
-                                                <div class="row">
-                                                    <div class="col-sm-8">
-                                                        <h6>Park Plaza Lodge Hotel</h6>
-                                                        <h6 class="mb-1 fw-light"><span class="text-secondary">Room:</span> Deluxe Pool View with Breakfast</h6>
-                                                        <ul class="list-inline mb-0">
-                                                            <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
-                                                            <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
-                                                            <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
-                                                            <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
-                                                            <li class="list-inline-item me-0 small"><i class="fas fa-star-half-alt text-warning"></i></li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="col-sm-4">
-                                                        <h6 class="mb-0">14 April 2022</h6>
-                                                        <p class="text-success mb-0">Breakfast Included</p>
-                                                    </div>
-                                                </div>
-                                                <hr>
-                                                <div class="row">
-                                                    <div class="col-sm-8">
-                                                        <h6>Pride moon Village Resort &amp; Spa</h6>
-                                                        <h6 class="mb-1 fw-light"><span class="text-secondary">Room:</span> Deluxe Pool View with Breakfast</h6>
-                                                        <ul class="list-inline mb-0">
-                                                            <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
-                                                            <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
-                                                            <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
-                                                            <li class="list-inline-item me-0 small"><i class="fas fa-star text-warning"></i></li>
-                                                            <li class="list-inline-item me-0 small"><i class="fas fa-star-half-alt text-warning"></i></li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="col-sm-4">
-                                                        <h6 class="mb-0">16 April 2022</h6>
-                                                        <p class="text-success mb-0">Breakfast Included</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div> --}}
 
                                         <div class="card border">
                                             <div class="card-header border-bottom d-flex justify-content-between">
@@ -243,25 +181,25 @@
                                                     <div class="col-md-5">
                                                         <div class="form-control-bg-light">
                                                             <label class="form-label">First name</label>
-                                                            <input type="text" class="form-control">
+                                                            <input type="text" id="firstName" class="form-control">
                                                         </div>
                                                     </div>
                                                     <div class="col-md-5">
                                                         <div class="form-control-bg-light">
                                                             <label class="form-label">Last name</label>
-                                                            <input type="text" class="form-control">
+                                                            <input type="text" id="lastName" class="form-control">
                                                         </div>
                                                     </div>
                                                     <div class="col-md-6">
                                                         <div class="form-control-bg-light">
                                                             <label class="form-label">Date of birth</label>
-                                                            <input type="text" class="form-control flatpickr flatpickr-input" data-date-format="d M Y" readonly="readonly">
+                                                            <input type="text" id="dob" class="form-control flatpickr flatpickr-input" data-date-format="d M Y" readonly="readonly">
                                                         </div>
                                                     </div>
                                                     <div class="col-md-6">
                                                         <div class="form-control-bg-light">
                                                             <label class="form-label">Aadhar number</label>
-                                                            <input type="text" class="form-control">
+                                                            <input type="text" id="aadharNumber" class="form-control">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -277,13 +215,13 @@
                                                     <div class="col-md-6">
                                                         <div class="form-control-bg-light">
                                                             <label class="form-label">Mobile Number</label>
-                                                            <input type="text" class="form-control">
+                                                            <input type="text" id="mobile" class="form-control">
                                                         </div>
                                                     </div>
                                                     <div class="col-md-6">
                                                         <div class="form-control-bg-light">
                                                             <label class="form-label">Email id</label>
-                                                            <input type="email" class="form-control">
+                                                            <input type="email" id="email" class="form-control">
                                                         </div>
                                                     </div>
                                                 </div>
@@ -300,53 +238,13 @@
                                     <div class="vstack gap-4">
                                         <h4 class="mb-0">Payment options</h4>
                                         <hr class="my-0">
-                                        {{-- <div class="card border">
-                                            <div class="card-header border-bottom d-sm-flex justify-content-between align-items-center">
-                                                <h5 class="mb-2 mb-sm-0">Credit or Debit Card</h5>
-                                            </div>
-                                            <div class="card-body">
-                                                <div class="row g-4">
-                                                    <div class="col-12">
-                                                        <label class="form-label">Card Number</label>
-                                                        <div class="position-relative form-control-bg-light">
-                                                            <input type="text" class="form-control" maxlength="14" placeholder="XXXX XXXX XXXX XXXX">
-                                                            <img src="assets/images/element/visa.svg" class="w-30px position-absolute top-50 end-0 translate-middle-y me-2 d-none d-sm-block" alt="">
-                                                        </div>	
-                                                    </div>
-                                                    <div class="col-md-4">
-                                                        <label class="form-label">Expiration Month</label>
-                                                        <div class="form-control-bg-light">
-                                                            <input type="text" class="form-control" maxlength="2">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-4">
-                                                        <label class="form-label">Expiration Year</label>
-                                                        <div class="form-control-bg-light">
-                                                            <input type="text" class="form-control" maxlength="4">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-md-4">
-                                                        <label class="form-label">CVV / CVC</label>
-                                                        <div class="form-control-bg-light">
-                                                            <input type="text" class="form-control" maxlength="3" placeholder="XXX">
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-12">
-                                                        <label class="form-label">Name of the cardholder</label>
-                                                        <div class="form-control-bg-light">
-                                                            <input type="text" class="form-control" aria-label="name of the cardholder">
-                                                        </div>	
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div> --}}
 
                                         <div class="card border">
                                             <div class="card-header border-bottom">
                                                 <h5 class="mb-0">Pay with Razorpay</h5>
                                             </div>
                                             <div class="card-body text-center">
-                                                <img src="assets/images/element/paypal.svg" class="h-70px mb-3" alt="">
+                                                {{-- <img src="assets/images/element/paypal.svg" class="h-70px mb-3" alt=""> --}}
                                                 <p class="mb-3"><strong>Tips:</strong> Simply click on the payment button below to proceed to the PayPal payment page.</p>
                                                 <a href="#"  id="payBtn" class="btn btn-sm btn-outline-primary mb-0">Pay with Razorpay</a>
                                             </div>
@@ -396,9 +294,6 @@
                                             <input type="hidden" id="payable_type" value="tour">
                                             <input type="hidden" id="final_amount" value="{{ $finalAmount }}">
                                         </div>
-                                        {{-- <div class="d-grid mt-4">
-                                            <button class="btn btn-primary next-btn mb-0">Book as Guest</button>
-                                        </div> --}}
                                     </div>
                                 </div>
                             </div>
@@ -454,67 +349,77 @@
 
 <script>
 
-document.getElementById('payBtn').onclick = function(){
+    document.getElementById('payBtn').onclick = function(){
+        var guests = document.getElementById('no_of_travelers').value;
+        var checkIn = document.getElementById('travel_date').value;
+        var dob = document.querySelector('input[id="dob"]').value;
+        var amount = document.getElementById('final_amount').value;
+        var payable_id = document.getElementById('payable_id').value;
+        var payable_type = document.getElementById('payable_type').value;
 
-var amount = document.getElementById('final_amount').value;
-var payable_id = document.getElementById('payable_id').value;
-var payable_type = document.getElementById('payable_type').value;
+        let moreData = { aadharNumber: document.getElementById('aadharNumber').value,
+                        dob: document.getElementById('dob').value };
 
-// 1️⃣ Create order from server
-fetch("{{ route('create.order') }}", {
-    method: 'POST',
-    headers: {
-        'Content-Type':'application/json',
-        'X-CSRF-TOKEN':"{{ csrf_token() }}"
-    },
-    body: JSON.stringify({ amount: amount })
-})
-.then(res => res.json())
-.then(function(data){
+        // 1️⃣ Create order from server
+        fetch("{{ route('create.order') }}", {
+            method: 'POST',
+            headers: {
+                'Content-Type':'application/json',
+                'X-CSRF-TOKEN':"{{ csrf_token() }}"
+            },
+            body: JSON.stringify({ amount: amount })
+        }).then(res => res.json()).then(function(data){
 
-    var options = {
-        "key": data.key,
-        "amount": data.amount * 100,
-        "currency": "INR",
-        "name": payable_type.charAt(0).toUpperCase() + payable_type.slice(1) + " Booking",
-        "description": "Payment for " + payable_type,
-        "order_id": data.order_id,
-        "handler": function(response){
-            
-            // 2️⃣ Verify payment server side
-            fetch("{{ route('verify.payment') }}", {
-                method: 'POST',
-                headers: {
-                    'Content-Type':'application/json',
-                    'X-CSRF-TOKEN':"{{ csrf_token() }}"
-                },
-                body: JSON.stringify({
-                    razorpay_payment_id: response.razorpay_payment_id,
-                    razorpay_order_id: response.razorpay_order_id,
-                    razorpay_signature: response.razorpay_signature,
-                    amount: amount,
-                    payable_id: payable_id,
-                    payable_type: payable_type
-                })
-            })
-            .then(res => res.json())
-            .then(function(res){
-                if(res.status === 'success'){
-                   
-                    window.location.href = res.redirect;
-                } else {
-                    alert('Payment Failed: ' + res.error);
+            var options = {
+                "key": data.key,
+                "amount": data.amount * 100,
+                "currency": "INR",
+                "name": payable_type.charAt(0).toUpperCase() + payable_type.slice(1) + " Booking",
+                "description": "Payment for " + payable_type,
+                "order_id": data.order_id,
+                "handler": function(response){
+                    
+                    fetch("{{ route('verify.payment') }}", {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type':'application/json',
+                            'X-CSRF-TOKEN':"{{ csrf_token() }}"
+                        },
+                        body: JSON.stringify({
+                            razorpay_payment_id: response.razorpay_payment_id,
+                            razorpay_order_id: response.razorpay_order_id,
+                            razorpay_signature: response.razorpay_signature,
+                            amount: amount,
+                            checkIn: checkIn,
+                            checkOut: null,
+                            guests: guests,
+                            payable_id: payable_id,
+                            payable_type: payable_type,
+                            title: document.getElementById('title').value,
+                            first_name: document.querySelector('input[id="firstName"]').value,
+                            last_name: document.querySelectorAll('input[id="lastName"]').value,
+                            email: document.querySelector('input[id="email"]').value,
+                            mobile: document.querySelector('input[id="mobile"]').value,
+                            moreData: moreData,
+                        })
+                    })
+                    .then(res => res.json())
+                    .then(function(res){
+                        console.log(res);
+
+                        if(res.status === 'success'){
+                            window.location.href = res.redirect;
+                        } else {
+                            alert('Payment Failed: ' + res.error);
+                        }
+                    });
                 }
-            });
+            };
 
-        }
-    };
+            var rzp = new Razorpay(options);
+            rzp.open();
 
-    var rzp = new Razorpay(options);
-    rzp.open();
-
-});
-
-}
+        });
+    }
 </script>
 @endsection

@@ -97,7 +97,7 @@
                                     <div class="col-lg-4">
                                         <div class="bg-light py-3 px-4 rounded-3">
                                             <h6 class="fw-light small mb-1">Rooms &amp; Guests</h6>
-                                            <h5 class="mb-1">{{ $guestsRaw }}</h5>
+                                            <h5 class="mb-1">{{ $guestsRaw }}G - {{$rooms}}R</h5>
                                             <small><i class="bi bi-brightness-high me-1"></i>{{ $nights }} Nights - {{ $days }} Days</small>
                                         </div>
                                     </div>
@@ -153,12 +153,12 @@
 
                                     <div class="col-md-5">
                                         <label class="form-label">First Name</label>
-                                        <input type="text" class="form-control form-control-lg" placeholder="Enter your name">
+                                        <input type="text" id="firstName" class="form-control form-control-lg" placeholder="Enter your name">
                                     </div>
 
                                     <div class="col-md-5">
                                         <label class="form-label">Last Name</label>
-                                        <input type="text" class="form-control form-control-lg" placeholder="Enter your name">
+                                        <input type="text" id="lastName" class="form-control form-control-lg" placeholder="Enter your name">
                                     </div>
 
                                     {{-- <div class="col-12">
@@ -167,13 +167,13 @@
 
                                     <div class="col-md-6">
                                         <label class="form-label">Email id</label>
-                                        <input type="email" class="form-control form-control-lg" placeholder="Enter your email">
+                                        <input type="email" id="email" class="form-control form-control-lg" placeholder="Enter your email">
                                         <div id="emailHelp" class="form-text">(Booking Details will be sent to this email ID)</div>
                                     </div>
 
                                     <div class="col-md-6">
                                         <label class="form-label">Mobile number</label>
-                                        <input type="text" class="form-control form-control-lg" placeholder="Enter your mobile number">
+                                        <input type="text" id="mobile" class="form-control form-control-lg" placeholder="Enter your mobile number">
                                     </div>
                                 </form>
 
@@ -188,31 +188,31 @@
                                     <div class="card-body">
                                         <form class="hstack flex-wrap gap-3">
                                             <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" value="" id="hotelType1">
+                                                <input class="form-check-input prefrence" type="checkbox" value="" id="hotelType1">
                                                 <label class="form-check-label" for="hotelType1">Smoking room</label>
                                             </div>
                                             <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" value="" id="hotelType2">
+                                                <input class="form-check-input prefrence" type="checkbox" value="" id="hotelType2">
                                                 <label class="form-check-label" for="hotelType2">Late check-in</label>
                                             </div>
                                             <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" value="" id="hotelType3">
+                                                <input class="form-check-input prefrence" type="checkbox" value="" id="hotelType3">
                                                 <label class="form-check-label" for="hotelType3">Early check-in</label>
                                             </div>
                                             <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" value="" id="hotelType4">
+                                                <input class="form-check-input prefrence" type="checkbox" value="" id="hotelType4">
                                                 <label class="form-check-label" for="hotelType4">Room on a high floor</label>
                                             </div>
                                             <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" value="" id="hotelType5">
+                                                <input class="form-check-input prefrence" type="checkbox" value="" id="hotelType5">
                                                 <label class="form-check-label" for="hotelType5">Large bed</label>
                                             </div>
                                             <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" value="" id="hotelType6">
+                                                <input class="form-check-input prefrence" type="checkbox" value="" id="hotelType6">
                                                 <label class="form-check-label" for="hotelType6">Airport transfer</label>
                                             </div>
                                             <div class="form-check">
-                                                <input class="form-check-input" type="checkbox" value="" id="hotelType8">
+                                                <input class="form-check-input prefrence" type="checkbox" value="" id="hotelType8">
                                                 <label class="form-check-label" for="hotelType8">Twin beds</label>
                                             </div>
                                         </form>	
@@ -230,7 +230,7 @@
                                 <div class="bg-primary bg-opacity-10 rounded-3 mb-4 p-3">
                                     <div class="d-md-flex justify-content-md-between align-items-center">
                                         <div class="d-sm-flex align-items-center mb-2 mb-md-0">
-                                            <img src="assets/images/element/16.svg" class="h-50px" alt="">
+                                            {{-- <img src="assets/images/element/16.svg" class="h-50px" alt=""> --}}
                                             <div class="ms-sm-3 mt-2 mt-sm-0">
                                                 <h5 class="card-title mb-0">Get Additional Discount</h5>
                                                 <p class="mb-0">Login to access saved payments and discounts!</p>
@@ -364,16 +364,15 @@
                                         <div id="collapse-3" class="accordion-collapse collapse" aria-labelledby="heading-3" data-bs-parent="#accordioncircle" style="">
                                             <div class="accordion-body">
                                                 <div class="card card-body border align-items-center text-center mt-4">
-                                                    <img src="assets/images/element/paypal.svg" class="h-70px mb-3" alt="">
-                                                    <p class="mb-3"><strong>Tips:</strong> Simply click on the payment button below to proceed to the PayPal payment page.</p>
-                                                        <!-- Razorpay Payment Button -->
-                                                        <button type="button" id="payBtn" class="btn btn-sm btn-outline-primary mb-0">
-                                                            Pay with Razorpay
-                                                        </button>
-                                                        <input type="hidden" id="payable_id" value="{{ $hotel->id }}">
-                                                            <input type="hidden" id="payable_type" value="hotel">
-                                                            <input type="hidden" id="final_amount" value="{{ $finalAmount }}">
-
+                                                    {{-- <img src="assets/images/element/paypal.svg" class="h-70px mb-3" alt=""> --}}
+                                                    <p class="mb-3"><strong>Tips:</strong> Simply click on the payment button below to proceed to the Razorpay payment page.</p>
+                                                    <!-- Razorpay Payment Button -->
+                                                    <button type="button" id="payBtn" class="btn btn-sm btn-outline-primary mb-0">
+                                                        Pay with Razorpay
+                                                    </button>
+                                                    <input type="hidden" id="payable_id" value="{{ $hotel->id }}">
+                                                    <input type="hidden" id="payable_type" value="hotel">
+                                                    <input type="hidden" id="final_amount" value="{{ $finalAmount }}">
                                                 </div>
                                             </div>
                                         </div>
@@ -382,7 +381,7 @@
                             </div>
 
                             <div class="card-footer p-4 pt-0">
-                                <p class="mb-0">By processing, You accept Booking <a href="#">Terms of Services</a> and <a href="#">Policy</a></p>
+                                <p class="mb-0">By processing, You accept Booking <a href="{{ url('/terms') }}">Terms of Services</a> and <a href="{{ url('/privacy-policy') }}">Policy</a></p>
                             </div>
                         </div>
                     </div>	
@@ -455,66 +454,74 @@
 
 <script>
 
-document.getElementById('payBtn').onclick = function(){
+    document.getElementById('payBtn').onclick = function(){
+        var guests = {{ $guestsRaw }};
+        var checkIn = "{{ $checkIn }}";
+        var checkOut = "{{ $checkOut }}";
+        var amount = document.getElementById('final_amount').value;
+        var payable_id = document.getElementById('payable_id').value;
+        var payable_type = document.getElementById('payable_type').value;
 
-var amount = document.getElementById('final_amount').value;
-var payable_id = document.getElementById('payable_id').value;
-var payable_type = document.getElementById('payable_type').value;
+        // 1️⃣ Create order from server
+        fetch("{{ route('create.order') }}", {
+            method: 'POST',
+            headers: {
+                'Content-Type':'application/json',
+                'X-CSRF-TOKEN':"{{ csrf_token() }}"
+            },
+            body: JSON.stringify({ amount: amount })
+        }).then(res => res.json()).then(function(data){
 
-// 1️⃣ Create order from server
-fetch("{{ route('create.order') }}", {
-    method: 'POST',
-    headers: {
-        'Content-Type':'application/json',
-        'X-CSRF-TOKEN':"{{ csrf_token() }}"
-    },
-    body: JSON.stringify({ amount: amount })
-})
-.then(res => res.json())
-.then(function(data){
+            var options = {
+                "key": data.key,
+                "amount": data.amount * 100,
+                "currency": "INR",
+                "name": payable_type.charAt(0).toUpperCase() + payable_type.slice(1) + " Booking",
+                "description": "Payment for " + payable_type,
+                "order_id": data.order_id,
+                "handler": function(response){
+                    
+                    fetch("{{ route('verify.payment') }}", {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type':'application/json',
+                            'X-CSRF-TOKEN':"{{ csrf_token() }}"
+                        },
+                        body: JSON.stringify({
+                            razorpay_payment_id: response.razorpay_payment_id,
+                            razorpay_order_id: response.razorpay_order_id,
+                            razorpay_signature: response.razorpay_signature,
+                            amount: amount,
+                            checkIn: checkIn,
+                            checkOut: checkOut,
+                            guests: guests,
+                            payable_id: payable_id,
+                            payable_type: payable_type,
+                            title: document.getElementById('title').value,
+                            first_name: document.querySelector('input[id="firstName"]').value,
+                            last_name: document.querySelectorAll('input[id="lastName"]').value,
+                            email: document.querySelector('input[id="email"]').value,
+                            mobile: document.querySelector('input[id="mobile"]').value,
+                            moreData: Array.from(document.querySelectorAll('.prefrence:checked')).map(el => el.nextElementSibling.innerText)
+                        })
+                    })
+                    .then(res => res.json())
+                    .then(function(res){
+                        console.log(res);
 
-    var options = {
-        "key": data.key,
-        "amount": data.amount * 100,
-        "currency": "INR",
-        "name": payable_type.charAt(0).toUpperCase() + payable_type.slice(1) + " Booking",
-        "description": "Payment for " + payable_type,
-        "order_id": data.order_id,
-        "handler": function(response){
-            
-            // 2️⃣ Verify payment server side
-            fetch("{{ route('verify.payment') }}", {
-                method: 'POST',
-                headers: {
-                    'Content-Type':'application/json',
-                    'X-CSRF-TOKEN':"{{ csrf_token() }}"
-                },
-                body: JSON.stringify({
-                    razorpay_payment_id: response.razorpay_payment_id,
-                    razorpay_order_id: response.razorpay_order_id,
-                    razorpay_signature: response.razorpay_signature,
-                    amount: amount,
-                    payable_id: payable_id,
-                    payable_type: payable_type
-                })
-            })
-            .then(res => res.json())
-            .then(function(res){
-                if(res.status === 'success'){
-                    window.location.href = res.redirect;
-                } else {
-                    alert('Payment Failed: ' + res.error);
+                        if(res.status === 'success'){
+                            window.location.href = res.redirect;
+                        } else {
+                            alert('Payment Failed: ' + res.error);
+                        }
+                    });
                 }
-            });
+            };
 
-        }
-    };
+            var rzp = new Razorpay(options);
+            rzp.open();
 
-    var rzp = new Razorpay(options);
-    rzp.open();
-
-});
-
-}
+        });
+    }
 </script>
 @endsection

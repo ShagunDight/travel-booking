@@ -6,6 +6,8 @@ use App\Models\Category;
 use App\Models\Payment;
 use App\Models\Banner;
 use App\Models\Package;
+use App\Models\Image;
+use App\Models\Booking;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 
@@ -61,17 +63,19 @@ class TourController extends Controller
         return view('tours.tour_booking', compact('tour'));
     }
 
-    public function bookingSuccess($order_id)
+    public function bookingSuccess($id)
     {
-        $payment = Payment::with('tour_images')->where('razorpay_order_id', $order_id)->first();
-
+        $booking = Booking::find($id);
+        
+        $payment = Payment::with('tour')->where('razorpay_payment_id', $booking->payment_id)->where('payable_type', 'tour')->first();
         if (!$payment) {
             abort(404, "Payment not found.");
         }
 
         $tour = $payment->tour;
-        $user = auth()->user();
+        $image = Image::where('type', 3)->where('type_id', $tour->id)->latest()->first();
+        $user = json_decode($booking->traveler_details);
 
-        return view('tours.tour_bookingsuccess', compact('tour', 'payment', 'user'));
+        return view('tours.tour_bookingsuccess', compact('booking', 'tour', 'image', 'payment', 'user'));
     }
 }

@@ -7,9 +7,7 @@
             <div class="row">
                 <div class="col-md-10 col-xl-8 mx-auto">
                     <div class="card shadow">
-                    <img src="{{ asset($tour->image->url ?? 'images/default.jpg') }}"
-                            class="card-img-top"
-                            alt="{{ $tour->name }}">
+                        <img src="{{ asset($image->url ?? 'images/default.jpg') }}" height="50%" class="card-img-top" alt="{{ $image->name }}">
                         <div class="card-body text-center p-4">
                             <h1 class="card-title fs-3">🎊 Congratulations! 🎊</h1>
                             <p class="lead mb-3">Your trip has been booked</p>
@@ -24,7 +22,7 @@
                                         </li>
                                         <li class="list-group-item d-sm-flex justify-content-between align-items-center">
                                             <span class="mb-0"><i class="bi bi-person fa-fw me-2"></i>Booked by:</span>
-                                            <span class="h6 fw-normal mb-0">{{ $user->name }}</span>
+                                            <span class="h6 fw-normal mb-0">{{ $user->first_name }} {{ $user->last_name }}</span>
                                         </li>
                                     
                                         <li class="list-group-item d-sm-flex justify-content-between align-items-center">
@@ -41,7 +39,7 @@
                                         </li>
                                         <li class="list-group-item d-sm-flex justify-content-between align-items-center">
                                             <span class="mb-0"><i class="bi bi-calendar fa-fw me-2"></i>Tour Date:</span>
-                                            <span class="h6 fw-normal mb-0">{{ \Carbon\Carbon::parse($tour->start_date)->format('d M Y') }}</span>
+                                            <span class="h6 fw-normal mb-0">{{ \Carbon\Carbon::parse($booking->check_in)->format('d M Y') }}</span>
                                         </li>
                                         <li class="list-group-item d-sm-flex justify-content-between align-items-center">
                                             <span class="mb-0"><i class="bi bi-people fa-fw me-2"></i>Guests:</span>
