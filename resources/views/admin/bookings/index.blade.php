@@ -46,6 +46,7 @@
                                     {{ ucfirst($booking->status) }}
                                 </span>
                             </td>
+                            
                             <td class="text-center">
                                 <a href="{{ route('admin.bookings.edit',$booking) }}" class="btn btn-sm btn-outline-warning rounded-pill me-1">
                                     <i class="bi bi-pencil-square"></i>
