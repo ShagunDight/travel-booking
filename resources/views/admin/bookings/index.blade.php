@@ -27,14 +27,20 @@
                     @forelse($bookings as $booking)
                         <tr class="align-middle">
                             <td class="fw-semibold">{{ $loop->iteration }}</td>
-                            <td>{{ $booking->user->name ?? 'N/A' }}</td>
-                            <td>{{ class_basename($booking->bookable_type) }}</td>
+                            @php
+                                $details = json_decode($booking->traveler_details);
+                            @endphp
+                            <td>{{ $booking->user ? $booking->user->name : $details->first_name }}</td>
+                            <td>
+                                {{ class_basename($booking->bookable_type) === 'Property' ? 'Hotel' : class_basename($booking->bookable_type) }}
+                            </td>
                             <td>{{ $booking->bookable->name ?? 'N/A' }}</td>
                             <td>{{ $booking->guests }}</td>
                             <td>₹{{ number_format($booking->amount,2) }}</td>
                             <td>
                                 <span class="badge 
                                     @if($booking->status=='confirmed') bg-success 
+                                    @elseif($booking->status=='success') bg-success
                                     @elseif($booking->status=='pending') bg-warning 
                                     @else bg-danger @endif">
                                     {{ ucfirst($booking->status) }}
