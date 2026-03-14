@@ -84,18 +84,14 @@ Route::middleware(['auth','is_admin'])->prefix('admin')->as('admin.')->group(fun
 // TOUR
 // Route::get('/tour-booking/{id}', [TourController::class,'tour_booking'])->name('tour.booking');
 
-Route::get('/tour-booking-success/{order_id}', [\App\Http\Controllers\TourController::class,'bookingSuccess'])
-->name('tour.booking.success');
+Route::get('/tour-booking-success/{id}', [\App\Http\Controllers\TourController::class, 'bookingSuccess'])->name('tour.booking.success');
 
 // Hotel
-
-Route::get('/hotel-booking-success/{order_id}', [\App\Http\Controllers\HotelController::class, 'hotelBookingSuccess'])
-->name('hotel.booking.success');
-
+Route::get('/hotel-booking-success/{id}', [\App\Http\Controllers\HotelController::class, 'hotelBookingSuccess'])->name('hotel.booking.success');
 
 // Payment
-Route::post('/create-order',[PaymentController::class,'createOrder'])->name('create.order');
+Route::post('/create-order', [PaymentController::class, 'createOrder'])->name('create.order');
+Route::post('/verify-payment', [PaymentController::class, 'verifyPayment'])->name('verify.payment');
 
-Route::post('/verify-payment',[PaymentController::class,'verifyPayment'])->name('verify.payment');
 
 require __DIR__.'/auth.php';

@@ -10,11 +10,13 @@ class Booking extends Model
         'user_id',
         'bookable_id',
         'bookable_type',
+        'traveler_details',
         'check_in',
         'check_out',
         'booking_date',
         'guests',
         'amount',
+        'payment_id',
         'status',
         'meta' 
     ]; 

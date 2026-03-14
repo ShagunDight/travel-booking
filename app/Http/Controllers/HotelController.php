@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 use App\Models\Property;
 use App\Models\Room;
 use App\Models\Banner;
+use App\Models\Booking;
+use App\Models\Payment;
 use Illuminate\Http\Request;
 
 class HotelController extends Controller
@@ -154,6 +156,7 @@ class HotelController extends Controller
         //  Cast request inputs to Integers
         $nights = (int) $request->query('nights', 1);
         $guestsRaw = (int) $request->query('guests', 1);
+        $rooms = (int) $request->query('rooms', 1);
 
         $basePrice = $room->price_per_night; 
 
@@ -175,26 +178,25 @@ class HotelController extends Controller
         return view('hotels.hotel_booking', compact(
             'hotel', 'room', 'nights', 'days', 'guestsRaw', 
             'totalPrice', 'discount', 'priceAfterDiscount', 
-            'finalAmount', 'checkIn', 'checkOut'
+            'finalAmount', 'checkIn', 'checkOut', 'rooms',
         ));
     }
 
 
-    public function hotelBookingSuccess($order_id)
+    public function hotelBookingSuccess($id)
     {
-        $payment = Payment::with('hotel.hotel_images')
-                    ->where('razorpay_order_id', $order_id)
-                    ->where('payable_type', 'hotel')
-                    ->first();
+        $booking = Booking::find($id);
+        
+        $payment = Payment::with('hotel')->where('razorpay_payment_id', $booking->payment_id)->where('payable_type', 'hotel')->first();
 
         if (!$payment) {
             abort(404, "Payment not found.");
         }
 
         $hotel = $payment->hotel;
-        $user = Auth::user();
+        $user = json_decode($booking->traveler_details);
 
-        return view('hotels.hotel_bookingsuccess', compact('hotel', 'payment', 'user'));
+        return view('hotels.hotel_bookingsuccess', compact('booking','hotel', 'payment', 'user'));
     }
 }
 

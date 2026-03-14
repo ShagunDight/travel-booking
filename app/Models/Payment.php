@@ -22,33 +22,37 @@ use Illuminate\Database\Eloquent\Model;
 ];
 
 
-public function tour() {
-    return $this->belongsTo(Tour::class);
-}
+    public function tour() {
+        return $this->belongsTo(Tour::class);
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class);
     }
+
     public function payable()
     {
         return $this->morphTo();  // works for both Tour or Hotel
     }
+        
     protected static function boot()
-{
-    parent::boot();
-
-    static::creating(function ($payment) {
-        $lastPayment = Payment::orderBy('id','desc')->first();
-        if ($lastPayment && $lastPayment->booking_id) {
-            $lastNumber = (int) str_replace('BS-', '', $lastPayment->booking_id);
-            $payment->booking_id = 'BS-' . ($lastNumber + 1);
-        } else {
-            $payment->booking_id = 'BS-1001';
-        }
-    });
-}
-public function hotel()
     {
-        return $this->belongsTo(\App\Models\Property::class, 'hotel_id'); // <- correct
+        parent::boot();
+
+        static::creating(function ($payment) {
+            $lastPayment = Payment::orderBy('id','desc')->first();
+            if ($lastPayment && $lastPayment->booking_id) {
+                $lastNumber = (int) str_replace('BS-', '', $lastPayment->booking_id);
+                $payment->booking_id = 'BS-' . ($lastNumber + 1);
+            } else {
+                $payment->booking_id = 'BS-1001';
+            }
+        });
+    }
+    
+    public function hotel()
+    {
+        return $this->belongsTo(\App\Models\Property::class, 'hotel_id');
     }
 }

@@ -111,12 +111,12 @@
                         </div>
                     </div>	
                 </div>
-                <!-- @php
-                    [$checkIn, $checkOut] = array_map('trim', explode('to', $data['date_range'] ?? ''));
+                @php
+                    [$checkIn, $checkOut] = array_map('trim', explode('to', $data['date_range'] ?? (date('d M') . ' to ' . date('d M' , strtotime('+1 day')))));
                     $guestsRaw = $data['guests'] ?? '';
                     preg_match('/(\d+)\s*Guests?\s*(\d+)\s*Room?/i', $guestsRaw, $matches);
-                    $guests = $matches[1] ?? 0;
-                    $rooms  = $matches[2] ?? 0;
+                    $guests = $matches[1] ?? 1;
+                    $rooms  = $matches[2] ?? 1;
 
                     $year = now()->year;
                     $checkInDate  = \Carbon\Carbon::createFromFormat('d M Y', "$checkIn $year");
@@ -127,7 +127,7 @@
 
                     $totalPrice = $value->price_per_night * $nights;
                     $finalPrice = ($totalPrice - 200) + 100;
-                @endphp -->
+                @endphp
                 <aside class="col-xl-5 d-none d-xl-block">
                     <div class="card bg-transparent border">
                         <div class="card-header bg-transparent border-bottom">
@@ -180,50 +180,32 @@
 
 <!-- Payment -->
 <script>
-document.querySelectorAll('.selectRoom').forEach(function(btn){
-    btn.addEventListener('click', function(){
-        var roomId = this.getAttribute('data-id');
-        var price = this.getAttribute('data-price');
-        var nights = {{ $nights ?? 1 }};
-        var guests = {{ $guests ?? 1 }};
-        
-        var total = price * nights;
+    document.querySelectorAll('.selectRoom').forEach(function(btn){
+        btn.addEventListener('click', function(){
 
-        document.getElementById('roomPrice').innerHTML = '<i class="fa fa-inr"></i>' + price;
-        document.getElementById('totalPrice').innerHTML = '<i class="fa fa-inr"></i>' + total;
-        document.getElementById('finalPrice').innerHTML = '<i class="fa fa-inr"></i>' + total;
+            var roomId = this.dataset.id;
+            var price = parseFloat(this.dataset.price);
 
-        var continueBtn = document.getElementById('continueBooking');
-continueBtn.href = `{{ url('hotels/hotel_booking') }}/{{ $hotel->id }}?room_id=${roomId}&nights=${nights}&guests=${guests}`;
-    });
-});
+            var nights = {{ $nights ?? 1 }};
+            var rooms  = {{ $rooms ?? 1 }};
+            var guests = "{{ $guestsRaw ?? '1 Guest 1 Room' }}";
 
-document.querySelectorAll('.selectRoom').forEach(function(btn){
-    btn.addEventListener('click', function(){
-        var roomId = this.getAttribute('data-id');
-        var price = this.getAttribute('data-price');
-        var nights = {{ $nights ?? 1 }};
-        var guests = "{{ $guestsRaw ?? '1 Guest 1 Room' }}"; // Pass the raw string
-        
-        // Calculate (matching your summary logic)
-        var total = price * nights;
-        var finalAmount = total;
+            var total = price * rooms * nights;
 
-        // Update UI Summary
-        document.getElementById('roomPrice').innerHTML = '<i class="fa fa-inr"></i>' + price;
-        document.getElementById('totalPrice').innerHTML = '<i class="fa fa-inr"></i>' + total;
-        document.getElementById('finalPrice').innerHTML = '<i class="fa fa-inr"></i>' + finalAmount;
+            document.getElementById('roomPrice').innerHTML = '<i class="fa fa-inr"></i>' + price;
+            document.getElementById('totalPrice').innerHTML = '<i class="fa fa-inr"></i>' + total;
+            document.getElementById('finalPrice').innerHTML = '<i class="fa fa-inr"></i>' + total;
 
-        // Update the Link dynamically
-        var continueBtn = document.getElementById('continueBooking');
-        // Using URLSearchParams to handle spaces/special chars in guests string
-        let params = new URLSearchParams({
-            room_id: roomId,
-            nights: nights,
-            guests: guests
+            let params = new URLSearchParams({
+                room_id: roomId,
+                nights: nights,
+                guests: guests,
+                rooms: rooms
+            });
+
+            document.getElementById('continueBooking').href =
+            "{{ route('hotels.hotel_booking', $hotel->id) }}?" + params.toString();
         });
-        continueBtn.href = "{{ route('hotels.hotel_booking', $hotel->id) }}?" + params.toString();
     });
-});
 </script>
 @endsection
