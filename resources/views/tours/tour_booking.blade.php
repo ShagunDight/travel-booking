@@ -251,7 +251,7 @@
                                         </div>
                                         <div class="d-flex justify-content-between">
                                             <button class="btn btn-secondary prev-btn mb-0">Previous</button>
-                                            <button class="btn btn-success next-btn mb-0">Book now</button>
+                                            {{-- <button class="btn btn-success next-btn mb-0">Book now</button> --}}
                                         </div>
                                     </div>
                                 </div>

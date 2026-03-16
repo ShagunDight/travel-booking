@@ -48,7 +48,7 @@
                             </td>
                             
                             <td class="text-center">
-                                <a href="{{ route('admin.bookings.edit',$booking) }}" class="btn btn-sm btn-outline-warning rounded-pill me-1">
+                                <a href="{{ route('admin.bookings.edit', $booking) }}" class="btn btn-sm btn-outline-warning rounded-pill me-1">
                                     <i class="bi bi-pencil-square"></i>
                                 </a>
                                 <form action="{{ route('admin.bookings.destroy',$booking) }}" method="POST" class="d-inline">
